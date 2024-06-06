@@ -2,7 +2,7 @@
 package Compiladores;
 
 import java_cup.runtime.*;
-
+import Funciones.Instrucciones;
 
 //------> Codigo para el parser
 //------> Declaracion de variables, funciones y funciones de error
@@ -30,18 +30,52 @@ action code
 
 
 //------> Declaración de terminales
-terminal String ENTERO;
+
+terminal String ENTERO, DECIMAL, ID;
+terminal String DOSPUNTOS, PUNTOYCOMA;
+terminal String IGUAL, DOSIGUAL;
+terminal String SUMA, MENOS, POR, DIVISION, POTENCIA, MOD;
+terminal String DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
+terminal String OR, AND, XOR, NOT;
+terminal String PARENTESIS_A, PARENTESIS_C, LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C;
+terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN;
+terminal UMENOS;
 
 
 //------> Declaración de no terminales
-non terminal inicio;
 
+non terminal inicio;
+non terminal instruccion, instrucciones;
+non terminal Double expresion;
+
+//------> Declaración de precedencias
+
+precedence left SUMA, MENOS;
+precedence left POR, DIVISION;
+precedence right UMENOS;
 
 //------> Definir Simbolo Inicial
 start with inicio; 
 
-
 // ------------>  Producciones  <------------
 
-inicio ::= ENTERO
+inicio ::= instrucciones
+;
+
+instrucciones ::= instrucciones instruccion
+               |  instruccion
+;
+
+instruccion ::= PRINTLN PARENTESIS_A expresion:a PARENTESIS_C PUNTOYCOMA {: Instrucciones.ImprimirConsola(a + "\n"); :}
+              | PRINTLN PARENTESIS_A ID:b PARENTESIS_C PUNTOYCOMA    {: Instrucciones.ImprimirConsola(b + "\n"); :}
+;
+
+expresion ::= MENOS expresion:a                         {: RESULT = a * -1; :}%prec UMENOS
+            | expresion:a SUMA expresion:b              {: RESULT = a + b; :}
+            | expresion:a MENOS expresion:b             {: RESULT = a - b; :}
+            | expresion:a POR expresion:b               {: RESULT = a * b; :}
+            | expresion:a DIVISION expresion:b          {: RESULT = a / b; :}
+            | ENTERO:a                                  {: RESULT = new Double(a); :}
+            | DECIMAL:a                                 {: RESULT = new Double(a); :}
+            | PARENTESIS_A expresion:a PARENTESIS_C     {: RESULT = a; :}
 ;

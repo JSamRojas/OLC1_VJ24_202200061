@@ -32,6 +32,7 @@ public class main {
     }
     
         // Realizar Analisis
+    
     public static void analizar (String entrada){
         try {
             Compiladores.Lexer lexer = new Compiladores.Lexer(new StringReader(entrada)); 
@@ -41,6 +42,8 @@ public class main {
             System.out.println("Error fatal en compilación de entrada.");
             System.out.println(e);
         } 
-    } 
+    }
+
+    
     
 }

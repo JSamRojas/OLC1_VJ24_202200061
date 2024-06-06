@@ -1,5 +1,2 @@
-Esto es una prueba
-veremos como queda
-hola
-hola
-holaaaaaaaaaaaaaaaaaaaaa
+println(1+2+3+4+5-20/2.0);
+println("Cadena a Imprimir");
