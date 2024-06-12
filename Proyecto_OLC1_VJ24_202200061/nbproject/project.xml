@@ -13,8 +13,12 @@
             </test-roots>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>aleft</word>
+            <word>cadena</word>
             <word>DOSPUNTOS</word>
+            <word>expresiones</word>
             <word>funciones</word>
+            <word>FuncPrint</word>
             <word>IGUAL</word>
             <word>instrucciones</word>
             <word>Lexicas</word>

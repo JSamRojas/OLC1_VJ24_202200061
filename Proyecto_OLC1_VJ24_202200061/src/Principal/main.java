@@ -5,7 +5,6 @@
 
 package Principal;
 import GUI.VistaPrincipal;
-import java.io.StringReader;
 
 public class main {
 
@@ -29,21 +28,6 @@ public class main {
             System.out.println("No se ha podido generar los analizadores");
             System.out.println(e);
         }
-    }
-    
-        // Realizar Analisis
-    
-    public static void analizar (String entrada){
-        try {
-            Compiladores.Lexer lexer = new Compiladores.Lexer(new StringReader(entrada)); 
-            Compiladores.Parser parser = new Compiladores.Parser(lexer);
-            parser.parse();
-        } catch (Exception e) {
-            System.out.println("Error fatal en compilación de entrada.");
-            System.out.println(e);
-        } 
-    }
-
-    
+    } 
     
 }

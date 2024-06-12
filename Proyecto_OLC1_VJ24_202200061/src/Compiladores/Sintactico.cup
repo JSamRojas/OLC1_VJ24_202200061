@@ -1,24 +1,43 @@
 // ------------  Paquete e importaciones ------------
 package Compiladores;
 
+//importaciones
 import java_cup.runtime.*;
-import Funciones.Instrucciones;
+import Abstracto.Instruccion;
+import Simbolo.Tipo;
+import Simbolo.DatoNativo;
+import java.util.LinkedList;
+import Funciones.Errores;
+
+//instrucciones
+import Funciones.FuncPrint;
+
+//expresiones
+import Expresiones.Nativo;
+import Expresiones.*;
 
 //------> Codigo para el parser
 //------> Declaracion de variables, funciones y funciones de error
 
 parser code 
 {:
-    public static String resultado = ""; 
 
-    public void syntax_error(Symbol s)
-    {
-            System.err.println("Error Sintactico: "+ s.value + " - Fila: " + s.right + " - Columna: " + s.left + ". Recuperado" );
+    public LinkedList<Errores> listaErrores = new LinkedList<>();
+
+    public void syntax_error(Symbol s){
+
+            listaErrores.add(new Errores("SINTACTICO RECUPERABLE",
+                        "No se esperaba el componente "+s.value,
+                        s.left,
+                        s.right));
     }
 
-    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
-    {
-            System.err.println("Error Sintactico: "+ s.value + " - Fila: " + s.right + " - Columna: " + s.left + ". Sin recuperacion." );
+    public void unrecovered_syntax_error(Symbol s){
+
+            listaErrores.add(new Errores("SINTACTICO NO RECUPERABLE",
+                        "No se esperaba el componente "+s.value,
+                        s.left,
+                        s.right));
     }
 
 :}
@@ -31,27 +50,35 @@ action code
 
 //------> Declaración de terminales
 
-terminal String ENTERO, DECIMAL, ID;
+terminal String ENTERO, DECIMAL, ID, CADENA, TRUE, FALSE;
+terminal char CARACTER;
 terminal String DOSPUNTOS, PUNTOYCOMA;
 terminal String IGUAL, DOSIGUAL;
 terminal String SUMA, MENOS, POR, DIVISION, POTENCIA, MOD;
 terminal String DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
 terminal String OR, AND, XOR, NOT;
 terminal String PARENTESIS_A, PARENTESIS_C, LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C;
-terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN;
+terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN, DOUBLE;
 terminal UMENOS;
 
 
 //------> Declaración de no terminales
 
-non terminal inicio;
-non terminal instruccion, instrucciones;
-non terminal Double expresion;
+non terminal LinkedList<Instruccion> inicio, instrucciones;
+non terminal Instruccion instruccion;
+non terminal Instruccion variables, imprimir, casteo;
+non terminal Instruccion expresion, tipoCasteo;
 
 //------> Declaración de precedencias
 
+precedence left OR;
+precedence left AND;
+precedence left XOR;
+precedence right NOT;
+precedence left DOSIGUAL, DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
 precedence left SUMA, MENOS;
-precedence left POR, DIVISION;
+precedence left POR, DIVISION, MOD;
+precedence nonassoc POTENCIA;
 precedence right UMENOS;
 
 //------> Definir Simbolo Inicial
@@ -59,23 +86,47 @@ start with inicio;
 
 // ------------>  Producciones  <------------
 
-inicio ::= instrucciones
+inicio ::= instrucciones:a      {:   RESULT = a;   :}
 ;
 
-instrucciones ::= instrucciones instruccion
-               |  instruccion
+instrucciones ::= instrucciones:a instruccion:b     {:  RESULT = a; RESULT.add(b);   :}
+               |  instruccion:a                     {:  RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
 
-instruccion ::= PRINTLN PARENTESIS_A expresion:a PARENTESIS_C PUNTOYCOMA {: Instrucciones.ImprimirConsola(a + "\n"); :}
-              | PRINTLN PARENTESIS_A ID:b PARENTESIS_C PUNTOYCOMA    {: Instrucciones.ImprimirConsola(b + "\n"); :}
+instruccion ::= imprimir:a        {: RESULT = a; :}
+             |  variables:a       {: RESULT = a; :}
+             |  error PUNTOYCOMA
+             |  error
 ;
 
-expresion ::= MENOS expresion:a                         {: RESULT = a * -1; :}%prec UMENOS
-            | expresion:a SUMA expresion:b              {: RESULT = a + b; :}
-            | expresion:a MENOS expresion:b             {: RESULT = a - b; :}
-            | expresion:a POR expresion:b               {: RESULT = a * b; :}
-            | expresion:a DIVISION expresion:b          {: RESULT = a / b; :}
-            | ENTERO:a                                  {: RESULT = new Double(a); :}
-            | DECIMAL:a                                 {: RESULT = new Double(a); :}
-            | PARENTESIS_A expresion:a PARENTESIS_C     {: RESULT = a; :}
+imprimir ::= PRINTLN PARENTESIS_A expresion:a PARENTESIS_C PUNTOYCOMA {: RESULT = new FuncPrint(a, aleft, aright); :}
+;
+
+expresion ::= MENOS expresion:a                                 {: RESULT = new Aritmeticas(a, OperadoresAritmeticos.NEGACION, aleft, aright); :} %prec UMENOS
+            | NOT expresion:a                                   {: RESULT = new Logicas(a, OperadoresLogicos.NOT, aleft, aright); :}
+            | expresion:a MENOS expresion:b                     {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.RESTA, aleft, aright); :}
+            | expresion:a SUMA expresion:b                      {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.SUMA, aleft, aright); :}
+            | expresion:a POR expresion:b                       {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MULTIPLICACION, aleft, aright); :}
+            | expresion:a DIVISION expresion:b                  {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.DIVISION, aleft, aright); :}
+            | expresion:a POTENCIA expresion:b                  {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.POTENCIA, aleft, aright); :}
+            | expresion:a MOD expresion:b                       {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MODULO, aleft, aright); :}
+            | expresion:a DOSIGUAL expresion:b                  {: RESULT = new Relacionales(a, b, OperadoresRelacionales.IGUALACION, aleft, aright); :}
+            | expresion:a DIFERENCIA expresion:b                {: RESULT = new Relacionales(a, b, OperadoresRelacionales.DIFERENCIA, aleft, aright); :}
+            | expresion:a MENOR expresion:b                     {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MENORQUE, aleft, aright); :}
+            | expresion:a MENORIGUAL expresion:b                {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MENORIGUAL, aleft, aright); :}
+            | expresion:a MAYOR expresion:b                     {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MAYORQUE, aleft, aright); :}
+            | expresion:a MAYORIGUAL expresion:b                {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MAYORIGUAL, aleft, aright); :}
+            | expresion:a OR expresion:b                        {: RESULT = new Logicas(a, b, OperadoresLogicos.OR, aleft, aright); :}
+            | expresion:a AND expresion:b                       {: RESULT = new Logicas(a, b, OperadoresLogicos.AND, aleft, aright); :}
+            | expresion:a XOR expresion:b                       {: RESULT = new Logicas(a, b, OperadoresLogicos.XOR, aleft, aright); :}
+            | PARENTESIS_A INT PARENTESIS_C expresion:a         {: RESULT = new Casteo(a, DatoNativo.ENTERO, aleft, aright); :}
+            | PARENTESIS_A DOUBLE PARENTESIS_C expresion:a      {: RESULT = new Casteo(a, DatoNativo.DECIMAL, aleft, aright); :}
+            | PARENTESIS_A CHAR PARENTESIS_C expresion:a        {: RESULT = new Casteo(a, DatoNativo.CARACTER, aleft, aright); :}
+            | ENTERO:a                                          {: RESULT = new Nativo(Integer.parseInt(a), new Tipo(DatoNativo.ENTERO), aleft, aright); :}
+            | DECIMAL:a                                         {: RESULT = new Nativo(new Double(a), new Tipo(DatoNativo.DECIMAL), aleft, aright); :}
+            | CADENA:a                                          {: RESULT = new Nativo(a, new Tipo(DatoNativo.CADENA), aleft, aright); :}
+            | CARACTER:a                                        {: RESULT = new Nativo(a, new Tipo(DatoNativo.CARACTER), aleft, aright); :}
+            | TRUE:a                                            {: RESULT = new Nativo(true, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
+            | FALSE:a                                           {: RESULT = new Nativo(false, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
+            | PARENTESIS_A expresion:a PARENTESIS_C             {: RESULT = a; :}
 ;

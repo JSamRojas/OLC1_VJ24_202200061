@@ -1,2 +1,3 @@
-println(1+2+3+4+5-20/2.0);
-println("Cadena a Imprimir");
+println(1 == "hola");
+println((double) 16);
+println((char) 64);

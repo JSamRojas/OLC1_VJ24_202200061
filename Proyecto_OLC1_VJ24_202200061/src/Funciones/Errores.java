@@ -3,7 +3,7 @@ package Funciones;
 
 public class Errores {
     
-    public static int contadora = 0;
+    public static int contadora = 1;
     private int numero;
     private String tipo;
     private String descripcion;
@@ -37,5 +37,11 @@ public class Errores {
     public int getColumna() {
         return columna;
     }
+
+    @Override
+    public String toString() {
+        return "Error numero=" + numero + ", tipo=" + tipo + ", descripcion=" + descripcion + ", linea=" + linea + ", columna=" + columna;
+    }
+    
     
 }

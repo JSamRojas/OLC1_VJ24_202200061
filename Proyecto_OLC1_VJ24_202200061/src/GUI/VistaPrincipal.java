@@ -1,19 +1,25 @@
 
 package GUI;
 
-import Principal.main;
-import Funciones.Instrucciones;
+import Abstracto.Instruccion;
+import Simbolo.Arbol;
+import Simbolo.TablaSimbolos;
+import Funciones.Errores;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashMap;
+import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -30,6 +36,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public static JButton botonJtabbed = new JButton("+");
     public static HashMap<String, JTextArea> Ventanas = new HashMap<>();
     public static int indice = 1;
+    public static LinkedList<Errores> lista = new LinkedList<>();
     
     public VistaPrincipal() {
         
@@ -192,6 +199,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Reportes");
 
         jMenuItem4.setText("Reporte de Errores");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuItem5.setText("Generar AST");
@@ -234,7 +246,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // AGFREGAR VENTANA DESDE MENU
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
         AgregarVentana();
@@ -286,6 +299,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    // FUNCION REALIZAR COMPILACION
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         
         int index2 = jTabbedPane1.getSelectedIndex();
@@ -295,8 +309,42 @@ public class VistaPrincipal extends javax.swing.JFrame {
             String nombre = jTabbedPane1.getTitleAt(index2);
             jTextArea1.setText("");
             String textoanalizar = Ventanas.get(nombre).getText();
-            main.analizar(textoanalizar);
-            jTextArea1.setText(Instrucciones.TextoConsola.replace("\"", ""));
+            
+            try {
+                Compiladores.Lexer lexer = new Compiladores.Lexer(new BufferedReader(new StringReader(textoanalizar))); 
+                Compiladores.Parser parser = new Compiladores.Parser(lexer);
+                var resultado = parser.parse();
+                var ast = new Arbol((LinkedList<Instruccion>) resultado.value);
+                var tabla = new TablaSimbolos();
+                tabla.setNombre("GLOBAL");
+                ast.setConsola("");
+                lista.clear();
+                lista.addAll(lexer.listaErrores);
+                lista.addAll(parser.listaErrores);
+                
+                for(var a : ast.getInstrucciones()){
+                    if(a == null){
+                        continue;
+                    }
+                    
+                    var res = a.interpretar(ast, tabla);
+                    if(res instanceof Errores){
+                        lista.add((Errores) res);
+                    }
+                }
+                
+                String consola = ast.getConsola();
+
+                for (var i : lista){
+                    consola += i + "\n";
+                }
+                
+                jTextArea1.setText(consola);
+                
+            } catch (Exception e) {
+                System.out.println("Error fatal en compilación de entrada.");
+                System.out.println(e);
+            } 
             
         } else{
             
@@ -331,6 +379,58 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }  
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+    
+    // REPORTE DE ERRORES
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Funciones.Errores.contadora = 1;
+        
+        StringBuilder htmlTable = new StringBuilder();
+        htmlTable.append("<html>");
+        htmlTable.append("<head>");
+        htmlTable.append("<title>Tabla de Errores</title>");
+        htmlTable.append("<style>");
+        htmlTable.append("body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }");
+        htmlTable.append("h1 { color: #333; }");
+        htmlTable.append("table { width: 100%; border-collapse: collapse; margin: 20px 0; }");
+        htmlTable.append("th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }");
+        htmlTable.append("th { background-color: #f2f2f2; color: #333; }");
+        htmlTable.append("tr:nth-child(even) { background-color: #f9f9f9; }");
+        htmlTable.append("tr:hover { background-color: #e0e0e0; }");
+        htmlTable.append("</style>");
+        htmlTable.append("</head>");
+        htmlTable.append("<body>");
+        htmlTable.append("<h1>Tabla de Errores</h1>");
+        htmlTable.append("<table border=\"1\">");
+        htmlTable.append("<tr>");
+        htmlTable.append("<th>Número</th>");
+        htmlTable.append("<th>Tipo</th>");
+        htmlTable.append("<th>Descripcion</th>");
+        htmlTable.append("<th>Línea</th>");
+        htmlTable.append("<th>Columna</th>");
+        htmlTable.append("</tr>");
+        
+        for(var i: lista){
+            htmlTable.append("<tr>");
+            htmlTable.append("<td>").append(i.getNumero()).append("</td>");
+            htmlTable.append("<td>").append(i.getTipo()).append("</td>");
+            htmlTable.append("<td>").append(i.getDescripcion()).append("</td>");
+            htmlTable.append("<td>").append(i.getLinea()).append("</td>");
+            htmlTable.append("<td>").append(i.getColumna()).append("</td>");
+            htmlTable.append("</tr>");
+        } 
+        
+        htmlTable.append("</table>");
+        htmlTable.append("</body>");
+        htmlTable.append("</html>");
+        
+        String ruta = "src/ReporteErrores.html";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))){
+            writer.write(htmlTable.toString());
+            System.out.println("Tabla de Errores generada y guardada en: " + ruta);
+        } catch (IOException e){
+            System.out.println("Error al guardar la tabla de Errores en el archivo: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
        
@@ -339,6 +439,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
     }
    
+    // FUNCION PARA AGREGAR UNA VENTANA NUEVA
     public static void AgregarVentana(){
                            
         JLabel TituloTab = new JLabel("Archivo " + indice);
