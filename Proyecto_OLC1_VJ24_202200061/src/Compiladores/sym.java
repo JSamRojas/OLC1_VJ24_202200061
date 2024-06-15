@@ -10,19 +10,23 @@ public class sym {
   /* terminals */
   public static final int DOSPUNTOS = 9;
   public static final int DIFERENCIA = 19;
-  public static final int CHAR = 38;
-  public static final int CONST = 35;
+  public static final int CHAR = 41;
+  public static final int CONST = 38;
+  public static final int GUIONBAJO = 36;
   public static final int POR = 15;
   public static final int PUNTOYCOMA = 10;
   public static final int ENTERO = 2;
   public static final int XOR = 26;
-  public static final int DOUBLE = 42;
-  public static final int INT = 36;
-  public static final int CORCHETE_C = 33;
-  public static final int PRINTLN = 41;
-  public static final int CORCHETE_A = 32;
-  public static final int LLAVE_C = 31;
-  public static final int LLAVE_A = 30;
+  public static final int DOUBLE = 45;
+  public static final int CONTINUE = 50;
+  public static final int INT = 39;
+  public static final int CORCHETE_C = 35;
+  public static final int PRINTLN = 44;
+  public static final int CORCHETE_A = 34;
+  public static final int LLAVE_C = 33;
+  public static final int FOR = 48;
+  public static final int LLAVE_A = 32;
+  public static final int MATCH = 47;
   public static final int NOT = 27;
   public static final int MENORIGUAL = 21;
   public static final int AND = 25;
@@ -30,8 +34,8 @@ public class sym {
   public static final int CARACTER = 8;
   public static final int OR = 24;
   public static final int SUMA = 13;
-  public static final int UMENOS = 43;
-  public static final int IF = 40;
+  public static final int UMENOS = 51;
+  public static final int IF = 43;
   public static final int ID = 4;
   public static final int MAYORIGUAL = 23;
   public static final int EOF = 0;
@@ -42,16 +46,20 @@ public class sym {
   public static final int MENOS = 14;
   public static final int MENOR = 20;
   public static final int MOD = 18;
+  public static final int BREAK = 49;
   public static final int DOSIGUAL = 12;
   public static final int MAYOR = 22;
   public static final int POTENCIA = 17;
-  public static final int PARENTESIS_C = 29;
-  public static final int PARENTESIS_A = 28;
-  public static final int BOOLEANO = 37;
-  public static final int STRING = 39;
+  public static final int ELSE = 46;
+  public static final int PARENTESIS_C = 31;
+  public static final int WHILE = 29;
+  public static final int PARENTESIS_A = 30;
+  public static final int BOOLEANO = 40;
+  public static final int STRING = 42;
   public static final int FALSE = 7;
   public static final int DIVISION = 16;
-  public static final int VAR = 34;
+  public static final int VAR = 37;
+  public static final int DO = 28;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -81,12 +89,15 @@ public class sym {
   "AND",
   "XOR",
   "NOT",
+  "DO",
+  "WHILE",
   "PARENTESIS_A",
   "PARENTESIS_C",
   "LLAVE_A",
   "LLAVE_C",
   "CORCHETE_A",
   "CORCHETE_C",
+  "GUIONBAJO",
   "VAR",
   "CONST",
   "INT",
@@ -96,6 +107,11 @@ public class sym {
   "IF",
   "PRINTLN",
   "DOUBLE",
+  "ELSE",
+  "MATCH",
+  "FOR",
+  "BREAK",
+  "CONTINUE",
   "UMENOS"
   };
 }

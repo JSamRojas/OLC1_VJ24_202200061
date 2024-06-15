@@ -1,20 +1,25 @@
 package Funciones;
 
+import Simbolo.Tipo;
+
 public class Simbolos {
     
     private String nombre;
-    private String tipo;
+    private Tipo tipo;
     private Object valor;
+    private boolean mutabilidad;
 
-    public Simbolos(String nombre, String tipo) {
+    public Simbolos(String nombre, Tipo tipo, boolean mutabilidad) {
         this.nombre = nombre;
         this.tipo = tipo;
+        this.mutabilidad = mutabilidad;
     }
 
-    public Simbolos(String nombre, String tipo, Object valor) {
+    public Simbolos(String nombre, Tipo tipo, Object valor, boolean mutabilidad) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.valor = valor;
+        this.mutabilidad = mutabilidad;
     }
 
     public String getNombre() {
@@ -25,11 +30,11 @@ public class Simbolos {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 
@@ -40,6 +45,16 @@ public class Simbolos {
     public void setValor(Object valor) {
         this.valor = valor;
     }
+
+    public boolean getMutabilidad() {
+        return mutabilidad;
+    }
+
+    public void setMutabilidad(boolean mutabilidad) {
+        this.mutabilidad = mutabilidad;
+    }
+    
+    
     
 }
 

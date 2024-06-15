@@ -70,6 +70,7 @@ caracter = [\'][^\n\'][\']
 "}"     { return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext()); }
 "["     { return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext()); }
 "]"     { return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext()); }
+"_"     { return new Symbol(sym.GUIONBAJO, yycolumn, yyline, yytext()); }
 
 // ------------>  Instrucciones <-------------------
 
@@ -81,9 +82,16 @@ caracter = [\'][^\n\'][\']
 "double"      { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }
 "string"      { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
 "if"          { return new Symbol(sym.IF, yycolumn, yyline, yytext()); }
+"for"         { return new Symbol(sym.FOR, yycolumn, yyline, yytext()); }
+"do"          { return new Symbol(sym.DO, yycolumn, yyline, yytext()); } 
+"while"       { return new Symbol(sym.WHILE, yycolumn, yyline, yytext()); }  
+"match"       { return new Symbol(sym.MATCH, yycolumn, yyline, yytext()); }
+"else"        { return new Symbol(sym.ELSE, yycolumn, yyline, yytext()); }
 "println"     { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext()); }
 "true"        { return new Symbol(sym.TRUE, yycolumn, yyline, yytext()); }
-"false"       { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }   
+"false"       { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }
+"break"       { return new Symbol(sym.BREAK, yycolumn, yyline, yytext()); } 
+"continue"    { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext()); }
 
 // ------------>  Expresiones <-------------------
 

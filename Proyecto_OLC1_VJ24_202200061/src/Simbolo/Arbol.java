@@ -10,7 +10,7 @@ public class Arbol {
     private LinkedList<Instruccion> instrucciones;
     private String consola;
     private TablaSimbolos tablaGlobal;
-    private LinkedList<Errores> errores;
+    public LinkedList<Errores> errores;
 
     public Arbol(LinkedList<Instruccion> instrucciones) {
         this.instrucciones = instrucciones;

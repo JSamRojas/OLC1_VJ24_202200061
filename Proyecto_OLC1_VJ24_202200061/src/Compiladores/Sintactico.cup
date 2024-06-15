@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import Funciones.Errores;
 
 //instrucciones
-import Funciones.FuncPrint;
+import Funciones.*;
 
 //expresiones
 import Expresiones.Nativo;
@@ -56,9 +56,10 @@ terminal String DOSPUNTOS, PUNTOYCOMA;
 terminal String IGUAL, DOSIGUAL;
 terminal String SUMA, MENOS, POR, DIVISION, POTENCIA, MOD;
 terminal String DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
-terminal String OR, AND, XOR, NOT;
-terminal String PARENTESIS_A, PARENTESIS_C, LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C;
-terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN, DOUBLE;
+terminal String OR, AND, XOR, NOT, DO, WHILE;
+terminal String PARENTESIS_A, PARENTESIS_C, LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C, GUIONBAJO;
+terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN, DOUBLE, ELSE, MATCH, FOR;
+terminal String BREAK, CONTINUE;
 terminal UMENOS;
 
 
@@ -66,8 +67,13 @@ terminal UMENOS;
 
 non terminal LinkedList<Instruccion> inicio, instrucciones;
 non terminal Instruccion instruccion;
-non terminal Instruccion variables, imprimir, casteo;
-non terminal Instruccion expresion, tipoCasteo;
+non terminal Instruccion declaracion, imprimir, modificacion, sif, smatch, scontinue;
+non terminal Instruccion expresion, sfor, swhile, act_for, sbreak, sdowhile;
+non terminal DatoNativo tiposCasteo;
+non terminal Tipo tipos;
+non terminal TipoMutabilidad mutabilidad;
+non terminal LinkedList<CasosMatch> casos;
+non terminal CasosMatch caso;
 
 //------> Declaración de precedencias
 
@@ -93,8 +99,15 @@ instrucciones ::= instrucciones:a instruccion:b     {:  RESULT = a; RESULT.add(b
                |  instruccion:a                     {:  RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
 
-instruccion ::= imprimir:a        {: RESULT = a; :}
-             |  variables:a       {: RESULT = a; :}
+instruccion ::= imprimir:a          {: RESULT = a; :}
+             |  declaracion:a       {: RESULT = a; :}
+             |  modificacion:a      {: RESULT = a; :}
+             |  sif:a               {: RESULT = a; :}
+             |  smatch:a            {: RESULT = a; :} 
+             |  sfor:a              {: RESULT = a; :}
+             |  swhile:a            {: RESULT = a; :}    
+             |  sbreak:a            {: RESULT = a; :}
+             |  sdowhile:a          {: RESULT = a; :}
              |  error PUNTOYCOMA
              |  error
 ;
@@ -102,31 +115,89 @@ instruccion ::= imprimir:a        {: RESULT = a; :}
 imprimir ::= PRINTLN PARENTESIS_A expresion:a PARENTESIS_C PUNTOYCOMA {: RESULT = new FuncPrint(a, aleft, aright); :}
 ;
 
-expresion ::= MENOS expresion:a                                 {: RESULT = new Aritmeticas(a, OperadoresAritmeticos.NEGACION, aleft, aright); :} %prec UMENOS
-            | NOT expresion:a                                   {: RESULT = new Logicas(a, OperadoresLogicos.NOT, aleft, aright); :}
-            | expresion:a MENOS expresion:b                     {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.RESTA, aleft, aright); :}
-            | expresion:a SUMA expresion:b                      {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.SUMA, aleft, aright); :}
-            | expresion:a POR expresion:b                       {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MULTIPLICACION, aleft, aright); :}
-            | expresion:a DIVISION expresion:b                  {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.DIVISION, aleft, aright); :}
-            | expresion:a POTENCIA expresion:b                  {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.POTENCIA, aleft, aright); :}
-            | expresion:a MOD expresion:b                       {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MODULO, aleft, aright); :}
-            | expresion:a DOSIGUAL expresion:b                  {: RESULT = new Relacionales(a, b, OperadoresRelacionales.IGUALACION, aleft, aright); :}
-            | expresion:a DIFERENCIA expresion:b                {: RESULT = new Relacionales(a, b, OperadoresRelacionales.DIFERENCIA, aleft, aright); :}
-            | expresion:a MENOR expresion:b                     {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MENORQUE, aleft, aright); :}
-            | expresion:a MENORIGUAL expresion:b                {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MENORIGUAL, aleft, aright); :}
-            | expresion:a MAYOR expresion:b                     {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MAYORQUE, aleft, aright); :}
-            | expresion:a MAYORIGUAL expresion:b                {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MAYORIGUAL, aleft, aright); :}
-            | expresion:a OR expresion:b                        {: RESULT = new Logicas(a, b, OperadoresLogicos.OR, aleft, aright); :}
-            | expresion:a AND expresion:b                       {: RESULT = new Logicas(a, b, OperadoresLogicos.AND, aleft, aright); :}
-            | expresion:a XOR expresion:b                       {: RESULT = new Logicas(a, b, OperadoresLogicos.XOR, aleft, aright); :}
-            | PARENTESIS_A INT PARENTESIS_C expresion:a         {: RESULT = new Casteo(a, DatoNativo.ENTERO, aleft, aright); :}
-            | PARENTESIS_A DOUBLE PARENTESIS_C expresion:a      {: RESULT = new Casteo(a, DatoNativo.DECIMAL, aleft, aright); :}
-            | PARENTESIS_A CHAR PARENTESIS_C expresion:a        {: RESULT = new Casteo(a, DatoNativo.CARACTER, aleft, aright); :}
-            | ENTERO:a                                          {: RESULT = new Nativo(Integer.parseInt(a), new Tipo(DatoNativo.ENTERO), aleft, aright); :}
-            | DECIMAL:a                                         {: RESULT = new Nativo(new Double(a), new Tipo(DatoNativo.DECIMAL), aleft, aright); :}
-            | CADENA:a                                          {: RESULT = new Nativo(a, new Tipo(DatoNativo.CADENA), aleft, aright); :}
-            | CARACTER:a                                        {: RESULT = new Nativo(a, new Tipo(DatoNativo.CARACTER), aleft, aright); :}
-            | TRUE:a                                            {: RESULT = new Nativo(true, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
-            | FALSE:a                                           {: RESULT = new Nativo(false, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
-            | PARENTESIS_A expresion:a PARENTESIS_C             {: RESULT = a; :}
+declaracion ::= mutabilidad:a ID:b DOSPUNTOS tipos:c IGUAL expresion:d PUNTOYCOMA     {: RESULT = new DeclaracionVar(b, d, a, c, aleft, aright); :}
+              | mutabilidad:a ID:b DOSPUNTOS tipos:c PUNTOYCOMA                       {: RESULT = new DeclaracionVar(b, null, a, c, aleft, aright); :}
+;
+
+modificacion ::= ID:a IGUAL expresion:b PUNTOYCOMA              {: RESULT = new ModificacionVar(a, b, aleft, aright); :}
+               | ID:a SUMA SUMA PUNTOYCOMA                      {: RESULT = new ModificacionVar(a, ModificadoresVar.AUMENTO, aleft, aright); :}
+               | ID:a MENOS MENOS PUNTOYCOMA                    {: RESULT = new ModificacionVar(a, ModificadoresVar.DECREMENTO, aleft, aright); :}
+;
+
+sif ::= IF PARENTESIS_A expresion:a PARENTESIS_C LLAVE_A instrucciones:b LLAVE_C                                        {: RESULT = new FuncIf(a, b, aleft, aright); :}
+      | IF PARENTESIS_A expresion:a PARENTESIS_C LLAVE_A instrucciones:b LLAVE_C ELSE LLAVE_A instrucciones:c LLAVE_C   {: RESULT = new FuncIf(a, b, c, aleft, aright); :}
+      | IF PARENTESIS_A expresion:a PARENTESIS_C LLAVE_A instrucciones:b LLAVE_C ELSE sif:c                             {: RESULT = new FuncElseIf(a, c, b, aleft, aright); :}
+;
+
+sfor ::= FOR PARENTESIS_A modificacion:a expresion:b PUNTOYCOMA act_for:c PARENTESIS_C LLAVE_A instrucciones:d LLAVE_C          {: RESULT = new FuncFor(a, b, c, d, aleft, aright); :}
+       | FOR PARENTESIS_A declaracion:a expresion:b PUNTOYCOMA act_for:c PARENTESIS_C LLAVE_A instrucciones:d LLAVE_C           {: RESULT = new FuncFor(a, b, c, d, aleft, aright); :}
+;
+
+swhile ::= WHILE PARENTESIS_A expresion:a PARENTESIS_C LLAVE_A instrucciones:b LLAVE_C          {: RESULT = new FuncWhile(a, b, aleft, aright); :}
+;
+
+sdowhile ::= DO LLAVE_A instrucciones:a LLAVE_C WHILE PARENTESIS_A expresion:b PARENTESIS_C PUNTOYCOMA        {: RESULT = new FuncDoWhile(b, a, aleft, aright); :}
+;
+
+act_for ::= ID:a IGUAL expresion:b               {: RESULT = new ModificacionVar(a, b, aleft, aright); :}
+          | ID:a SUMA SUMA                       {: RESULT = new ModificacionVar(a, ModificadoresVar.AUMENTO, aleft, aright); :}
+          | ID:a MENOS MENOS                     {: RESULT = new ModificacionVar(a, ModificadoresVar.DECREMENTO, aleft, aright); :}
+;
+
+smatch ::= MATCH expresion:a LLAVE_A casos:b LLAVE_C             {: RESULT = new FuncMatch(a, b, aleft, aright); :}
+;
+
+casos ::= casos:a caso:b        {: RESULT = a; RESULT.add(b); :}
+        | caso:a                {: RESULT = new LinkedList<>(); RESULT.add(a); :}
+;
+
+caso ::= expresion:a IGUAL MAYOR LLAVE_A instrucciones:b LLAVE_C        {: RESULT = new CasosMatch(a, b, true, aleft, aright); :}
+       | GUIONBAJO IGUAL MAYOR LLAVE_A instrucciones:a LLAVE_C          {: RESULT = new CasosMatch(null, a, false, aleft, aright); :}
+;
+
+sbreak ::= BREAK:a PUNTOYCOMA   {: RESULT = new Break(aleft, aright); :}
+;
+
+expresion ::= MENOS expresion:a                                     {: RESULT = new Aritmeticas(a, OperadoresAritmeticos.NEGACION, aleft, aright); :} %prec UMENOS
+            | NOT expresion:a                                       {: RESULT = new Logicas(a, OperadoresLogicos.NOT, aleft, aright); :}
+            | expresion:a MENOS expresion:b                         {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.RESTA, aleft, aright); :}
+            | expresion:a SUMA expresion:b                          {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.SUMA, aleft, aright); :}
+            | expresion:a POR expresion:b                           {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MULTIPLICACION, aleft, aright); :}
+            | expresion:a DIVISION expresion:b                      {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.DIVISION, aleft, aright); :}
+            | expresion:a POTENCIA expresion:b                      {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.POTENCIA, aleft, aright); :}
+            | expresion:a MOD expresion:b                           {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MODULO, aleft, aright); :}
+            | expresion:a DOSIGUAL expresion:b                      {: RESULT = new Relacionales(a, b, OperadoresRelacionales.IGUALACION, aleft, aright); :}
+            | expresion:a DIFERENCIA expresion:b                    {: RESULT = new Relacionales(a, b, OperadoresRelacionales.DIFERENCIA, aleft, aright); :}
+            | expresion:a MENOR expresion:b                         {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MENORQUE, aleft, aright); :}
+            | expresion:a MENORIGUAL expresion:b                    {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MENORIGUAL, aleft, aright); :}
+            | expresion:a MAYOR expresion:b                         {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MAYORQUE, aleft, aright); :}
+            | expresion:a MAYORIGUAL expresion:b                    {: RESULT = new Relacionales(a, b, OperadoresRelacionales.MAYORIGUAL, aleft, aright); :}
+            | expresion:a OR expresion:b                            {: RESULT = new Logicas(a, b, OperadoresLogicos.OR, aleft, aright); :}
+            | expresion:a AND expresion:b                           {: RESULT = new Logicas(a, b, OperadoresLogicos.AND, aleft, aright); :}
+            | expresion:a XOR expresion:b                           {: RESULT = new Logicas(a, b, OperadoresLogicos.XOR, aleft, aright); :}
+            | PARENTESIS_A tiposCasteo:a PARENTESIS_C expresion:b   {: RESULT = new Casteo(b, a, aleft, aright); :}
+            | ENTERO:a                                              {: RESULT = new Nativo(Integer.parseInt(a), new Tipo(DatoNativo.ENTERO), aleft, aright); :}
+            | DECIMAL:a                                             {: RESULT = new Nativo(new Double(a), new Tipo(DatoNativo.DECIMAL), aleft, aright); :}
+            | CADENA:a                                              {: RESULT = new Nativo(a, new Tipo(DatoNativo.CADENA), aleft, aright); :}
+            | CARACTER:a                                            {: RESULT = new Nativo(a, new Tipo(DatoNativo.CARACTER), aleft, aright); :}
+            | TRUE:a                                                {: RESULT = new Nativo(true, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
+            | FALSE:a                                               {: RESULT = new Nativo(false, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
+            | ID:a                                                  {: RESULT = new AccesoVariable(a, aleft, aright);:}
+            | PARENTESIS_A expresion:a PARENTESIS_C                 {: RESULT = a; :}
+;
+
+tiposCasteo ::= INT         {:   RESULT=DatoNativo.ENTERO;   :}
+              | DOUBLE      {:   RESULT=DatoNativo.DECIMAL;   :}
+              | CHAR        {:   RESULT=DatoNativo.CARACTER;   :}
+;
+
+tipos ::= INT           {:   RESULT=new Tipo(DatoNativo.ENTERO);   :}
+        | DOUBLE        {:   RESULT=new Tipo(DatoNativo.DECIMAL);   :}
+        | STRING        {:   RESULT=new Tipo(DatoNativo.CADENA);   :}
+        | CHAR          {:   RESULT=new Tipo(DatoNativo.CARACTER);   :}
+        | BOOLEANO      {:   RESULT=new Tipo(DatoNativo.BOOLEANO);   :}
+;
+
+mutabilidad ::= VAR     {:   RESULT = TipoMutabilidad.VAR;   :}
+              | CONST   {:   RESULT = TipoMutabilidad.CONST;   :}
 ;

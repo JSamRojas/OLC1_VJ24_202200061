@@ -1,3 +1,13 @@
-println(1 == "hola");
-println((double) 16);
-println((char) 64);
+var i: int = 0;
+var k: int = 0;
+while (i < 11) {
+    
+    println("Iteracion i" + i);
+    for(k = 0; k<=10 ; k++){
+      
+      println("Iteracion k" + k);
+      break;
+
+  }
+  i++;
+}

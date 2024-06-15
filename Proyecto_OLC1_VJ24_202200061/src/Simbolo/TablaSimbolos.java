@@ -2,6 +2,7 @@
 package Simbolo;
 
 import java.util.HashMap;
+import Funciones.Simbolos;
 
 public class TablaSimbolos {
     
@@ -44,4 +45,23 @@ public class TablaSimbolos {
         this.nombre = nombre;
     }
     
+    public boolean setVariable(Simbolos simbolo){
+        Simbolos busqueda = (Simbolos) this.TablaActual.get(simbolo.getNombre().toLowerCase());
+        if(busqueda == null){
+            this.TablaActual.put(simbolo.getNombre().toLowerCase(), simbolo);
+            return true;
+        }
+        return false;
+    }
+    
+    public Simbolos getVariable(String id){
+        for(TablaSimbolos i = this; i != null; i = i.getTablaAnterior()){
+            Simbolos busqueda = (Simbolos) i.TablaActual.get(id.toLowerCase());
+            if(busqueda != null){
+                return busqueda;
+            }
+        }
+        return null;
+    }
+ 
 }

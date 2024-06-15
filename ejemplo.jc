@@ -1,4 +1,30 @@
-fdawdw
-sadw
-dwada
-nuevo archivo con mismo nombre
+const nota: int = 100;
+println("Operaciones aritmeticas");
+var cadena: string = "Vamos " + "por " + "ese " + nota;
+println(cadena);
+var operaciones: double = 1 + 9 - 8 * 2 / 4 % 2 + (5 ** 2);
+println("El resultado de las operaciones es " + operaciones);
+
+println("");
+
+println("Operaciones Relacionales");
+var a: bool = 1 < 2;
+println("El valor de a es " + a);
+
+var b: bool = 1 == 2;
+println("El valor de b es " + b);
+
+println("");
+
+println("Operaciones Logicas");
+var c: bool = !!true;
+println("El valor de c es " + c);
+
+var d: bool = (true && false) || (false || false);
+println("El valor de d es " + d);
+
+println("");
+
+println("Operaciones combinadas");
+var e: bool = (1 == 2) || (10 < 5) || (!false);
+println("El valor de e es " + e);
