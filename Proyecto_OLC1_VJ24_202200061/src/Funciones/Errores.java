@@ -40,8 +40,7 @@ public class Errores {
 
     @Override
     public String toString() {
-        return "Error numero=" + numero + ", tipo=" + tipo + ", descripcion=" + descripcion + ", linea=" + linea + ", columna=" + columna;
+        return "Error numero = " + numero + ", tipo=" + tipo + ", descripcion=" + descripcion + ", linea=" + linea + ", columna=" + columna;
     }
-    
-    
+ 
 }

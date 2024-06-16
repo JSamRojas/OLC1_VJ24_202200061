@@ -36,7 +36,7 @@ entero = [0-9]+
 decimal = [0-9]+"."[0-9]+
 espacio = [ ]
 id_var = [a-zA-Z@][a-zA-Z0-9_]*
-cadena = [\"][^\n\"]*[\"]
+cadena = [\"][^\n]*[\"]
 comentario = (\/\/.*|\/\*[\s\S]*?\*\/)
 caracter = [\'][^\n\'][\']
 

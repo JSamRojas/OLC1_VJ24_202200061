@@ -123,11 +123,14 @@ public class Logicas extends Instruccion {
                 switch (tipo2) {
                     case BOOLEANO -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
-                        if((boolean) op1 || (boolean) op2){
+                        boolean op1bool = (boolean) op1;
+                        boolean op2bool = (boolean) op2;
+                        if(op1bool == op2bool){
                             return false;
                         } else {
                             return true;
                         }
+                        
                     }
                     default -> {
                         return new Errores("SEMANTICO", "No se puede realizar un XOR con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);

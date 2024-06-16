@@ -1,0 +1,109 @@
+Terminales = {ENTERO, DECIMAL, ID, CADENA, TRUE, FALSE, CARACTER, DOSPUNTOS, PUNTOYCOM,
+			 IGUAL, DOSIGUAL, SUMA, MENOS, POR, DIVISION, POTENCIA, MOD, DIFERENCIA, MENOR, MENORIGUAL,
+			 MAYOR, MAYORIGUAL, OR, AND, XOR, NOT, DO, WHILE, PARENTESIS_A, PARENTESIS_C, LLAVE_A,
+			 LLAVE_C, CORCHETE_A, CORCHETE_C, GUIONBAJO, VAR, CONST, INT, BOOLEANO, CHAR, STRING,
+			 IF, PRINTLN, DOUBLE, ELSE, MATCH, FOR, BREAK, CONTINUE, UMENOS}
+
+No Terminales = {<inicio>, <instrucciones>, <instruccion>, <declaracion>, <imprimir>,
+			     <modificacion>, <sif>, <smatch>, <scontinue>, <expresion>, <sfor>, <swhile>, <act_for>,
+		         <sbreak>, <sdowhile>, <tiposCasteo>, <tipos>, <mutabilidad>, <casos>, <caso>}
+				 
+Simbolo Inicial = <inicio>
+
+Producciones =
+
+	<inicio> ::= <instrucciones> 
+
+	<instrucciones> ::= <instrucciones> <instruccion>
+				   |  <instruccion>                     
+
+	<instruccion> ::= <imprimir>          
+				 |  <declaracion>       
+				 |  <modificacion>      
+				 |  <sif>               
+				 |  <smatch>           
+				 |  <sfor>              
+				 |  <swhile>                
+				 |  <sbreak>            
+				 |  <sdowhile>          
+				 |  <scontinue>
+
+
+	<imprimir> ::= PRINTLN PARENTESIS_A <expresion> PARENTESIS_C PUNTOYCOMA
+
+	<declaracion> ::= <mutabilidad> ID DOSPUNTOS <tipos> IGUAL <expresion> PUNTOYCOMA
+				  | <mutabilidad> ID DOSPUNTOS <tipos> PUNTOYCOMA
+
+	<modificacion> ::= ID IGUAL <expresion> PUNTOYCOMA
+				   | ID SUMA SUMA PUNTOYCOMA
+				   | ID MENOS MENOS PUNTOYCOMA
+
+	<sif> ::= IF PARENTESIS_A <expresion> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+		  | IF PARENTESIS_A <expresion> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C ELSE LLAVE_A <instrucciones> LLAVE_C
+		  | IF PARENTESIS_A <expresion> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C ELSE <sif>
+
+
+	<sfor> ::= FOR PARENTESIS_A <modificacion> <expresion> PUNTOYCOMA <act_for> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+		   | FOR PARENTESIS_A <declaracion> <expresion> PUNTOYCOMA <act_for> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+
+	<swhile> ::= WHILE PARENTESIS_A <expresion> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+
+	<sdowhile> ::= DO LLAVE_A <instrucciones> LLAVE_C WHILE PARENTESIS_A <expresion> PARENTESIS_C PUNTOYCOMA
+
+
+	<act_for> ::= ID IGUAL <expresion>
+			  | ID SUMA SUMA
+			  | ID MENOS MENOS
+
+	<smatch> ::= MATCH <expresion> LLAVE_A <casos> LLAVE_C
+
+	<casos> ::= <casos> <caso>
+			| <caso>
+
+
+	<caso> ::= <expresion> IGUAL MAYOR LLAVE_A <instrucciones> LLAVE_C
+		   | GUIONBAJO IGUAL MAYOR LLAVE_A <instrucciones> LLAVE_C
+
+	<sbreak> ::= BREAK PUNTOYCOMA
+
+	<scontinue> ::= CONTINUE PUNTOYCOMA
+
+	<expresion> ::= MENOS <expresion>
+				| NOT <expresion>
+				| <expresion> MENOS <expresion>
+				| <expresion> SUMA <expresion>
+				| <expresion> POR <expresion>
+				| <expresion> DIVISION <expresion>
+				| <expresion> POTENCIA <expresion>
+				| <expresion> MOD <expresion>
+				| <expresion> DOSIGUAL <expresion>
+				| <expresion> DIFERENCIA <expresion>
+				| <expresion> MENOR <expresion>
+				| <expresion> MENORIGUAL <expresion>
+				| <expresion> MAYOR <expresion>
+				| <expresion> MAYORIGUAL <expresion>
+				| <expresion> OR <expresion>
+				| <expresion> AND <expresion>
+				| <expresion> XOR <expresion>
+				| PARENTESIS_A tiposCasteo PARENTESIS_C <expresion>
+				| ENTERO
+				| DECIMAL
+				| CADENA
+				| CARACTER
+				| TRUE
+				| FALSE
+				| ID
+				| PARENTESIS_A <expresion> PARENTESIS_C                 
+
+	<tiposCasteo> ::= INT
+				  | DOUBLE
+				  | CHAR
+
+	<tipos> ::= INT
+			| DOUBLE
+			| STRING
+			| CHAR
+			| BOOLEANO
+
+	<mutabilidad> ::= VAR
+				  | CONST

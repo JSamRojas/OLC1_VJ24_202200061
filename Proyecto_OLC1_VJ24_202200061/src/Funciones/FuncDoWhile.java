@@ -36,10 +36,13 @@ public class FuncDoWhile extends Instruccion {
         
         do {
             
+            var newTabla2 = new TablaSimbolos(newTabla);
+            newTabla2.setNombre(newTabla.getNombre() + " - DO WHILE");
+            
             for (var i : this.InstruccionesWHILE){
                 
                 if(i instanceof DeclaracionVar){
-                    ((DeclaracionVar) i).setEntorno(newTabla.getNombre());
+                    ((DeclaracionVar) i).setEntorno(newTabla2.getNombre());
                 }
                 
                 if(i == null){
@@ -54,7 +57,7 @@ public class FuncDoWhile extends Instruccion {
                     break;
                 }
                 
-                var resultado = i.interpretar(arbol, newTabla);
+                var resultado = i.interpretar(arbol, newTabla2);
                 
                 if(resultado instanceof Errores){
                     return resultado;

@@ -110,7 +110,6 @@ instruccion ::= imprimir:a          {: RESULT = a; :}
              |  sdowhile:a          {: RESULT = a; :}
              |  scontinue:a         {: RESULT = a; :}
              |  error PUNTOYCOMA
-             |  error
 ;
 
 imprimir ::= PRINTLN PARENTESIS_A expresion:a PARENTESIS_C PUNTOYCOMA {: RESULT = new FuncPrint(a, aleft, aright); :}

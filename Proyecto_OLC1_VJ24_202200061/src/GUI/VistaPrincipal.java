@@ -319,6 +319,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             String textoanalizar = Ventanas.get(nombre).getText();
             
             try {
+                Errores.contadora = 1;
                 Compiladores.Lexer lexer = new Compiladores.Lexer(new BufferedReader(new StringReader(textoanalizar))); 
                 Compiladores.Parser parser = new Compiladores.Parser(lexer);
                 var resultado = parser.parse();
