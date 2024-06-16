@@ -92,6 +92,7 @@ caracter = [\'][^\n\'][\']
 "false"       { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }
 "break"       { return new Symbol(sym.BREAK, yycolumn, yyline, yytext()); } 
 "continue"    { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext()); }
+"\u00A0"      { }
 
 // ------------>  Expresiones <-------------------
 

@@ -64,7 +64,7 @@ public class Aritmeticas extends Instruccion {
             case MODULO -> 
                 this.modulo(opIzq, opDer);
             default ->
-                new Errores("SEMANTICO", "OPERADOR INVALIDO", this.linea, this.columna);
+                new Errores("SEMANTICO", "El operador " + this.operacion.toString() + " no puede realizar operaciones aritmeticas", this.linea, this.columna);
         };
         
     }
@@ -96,7 +96,7 @@ public class Aritmeticas extends Instruccion {
                         return op1.toString() + op2.toString();
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Suma erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una suma con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -123,7 +123,7 @@ public class Aritmeticas extends Instruccion {
                         return op1.toString() + op2.toString();
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Suma Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una suma con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -134,7 +134,7 @@ public class Aritmeticas extends Instruccion {
                         return op1.toString() + op2.toString();
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una suma entre un booleano y otro tipo de dato", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una suma entre un booleano y un " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -162,7 +162,7 @@ public class Aritmeticas extends Instruccion {
                         return op1.toString() + op2.toString();
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Suma Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una suma con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -171,7 +171,7 @@ public class Aritmeticas extends Instruccion {
                 return op1.toString() + op2.toString();
             }
             default -> {
-                return new Errores("SEMANTICO", "Suma Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una suma con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }      
     }
@@ -188,7 +188,7 @@ public class Aritmeticas extends Instruccion {
                 return (double) op1 * -1;
             }
             default -> {
-                return new Errores("SEMANTICO", "Negacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una negacion unaria a un tipo " + opU.toString(), this.linea, this.columna);
             }
         }
     }
@@ -213,7 +213,7 @@ public class Aritmeticas extends Instruccion {
                         return (int) op1 - AsciiValue;
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Resta Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una resta con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -233,7 +233,7 @@ public class Aritmeticas extends Instruccion {
                         return (double) op1 - AsciiValue;
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Resta Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una resta con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -250,15 +250,15 @@ public class Aritmeticas extends Instruccion {
                         return AsciiValue - (double) op2;
                     }
                     case CARACTER -> {
-                        return new Errores("SEMANTICO", "Resta Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una resta entre un caracter y un tipo" + tipo2.toString(), this.linea, this.columna);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Resta Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una resta con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Resta Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una resta con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }  
     }
@@ -283,7 +283,7 @@ public class Aritmeticas extends Instruccion {
                         return (int) op1 * AsciiValue;
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Multiplicacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una multiplicacion entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -303,7 +303,7 @@ public class Aritmeticas extends Instruccion {
                         return (double) op1 * AsciiValue;
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Multiplicacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una multiplicacion entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -320,15 +320,15 @@ public class Aritmeticas extends Instruccion {
                         return AsciiValue * (double) op2;
                     }
                     case CARACTER -> {
-                        return new Errores("SEMANTICO", "Multiplicacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una multiplicacion entre el tipo caracter y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Multiplicacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una multiplicacion entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Multiplicacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una multiplicacion con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -357,7 +357,7 @@ public class Aritmeticas extends Instruccion {
                         return op1dec / AsciiValue;
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Division Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una division entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -377,7 +377,7 @@ public class Aritmeticas extends Instruccion {
                         return (double) op1 / AsciiValue;
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Division Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una division entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -396,15 +396,15 @@ public class Aritmeticas extends Instruccion {
                         return AsciiValue / (double) op2;
                     }
                     case CARACTER -> {
-                        return new Errores("SEMANTICO", "Division Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una division entre un caracter y un tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Division Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una division entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Division Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una division con un tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -426,7 +426,7 @@ public class Aritmeticas extends Instruccion {
                         return Math.pow((int) op1, (double) op2);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Potencia Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una potencia entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -441,12 +441,12 @@ public class Aritmeticas extends Instruccion {
                         return Math.pow((double) op1, (double) op2);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Potencia Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una potencia entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Potencia Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una potencia con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -461,14 +461,16 @@ public class Aritmeticas extends Instruccion {
                         this.tipo.setTipo(DatoNativo.DECIMAL);
                         Integer op1int = (int) op1;
                         Double op1dec = op1int.doubleValue();
-                        return (op1dec % (double) op2);
+                        Integer op2int = (int) op2;
+                        Double op2dec = op2int.doubleValue();
+                        return (op1dec % op2dec);
                     }
                     case DECIMAL -> {
                         this.tipo.setTipo(DatoNativo.DECIMAL);
                         return ((int) op1 % (double) op2);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Potencia Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar un modulo entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -483,12 +485,12 @@ public class Aritmeticas extends Instruccion {
                         return ((double) op1 % (double) op2);
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Potencia Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar un modulo entre el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Potencia Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un modulo con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }

@@ -108,6 +108,7 @@ instruccion ::= imprimir:a          {: RESULT = a; :}
              |  swhile:a            {: RESULT = a; :}    
              |  sbreak:a            {: RESULT = a; :}
              |  sdowhile:a          {: RESULT = a; :}
+             |  scontinue:a         {: RESULT = a; :}
              |  error PUNTOYCOMA
              |  error
 ;
@@ -156,6 +157,9 @@ caso ::= expresion:a IGUAL MAYOR LLAVE_A instrucciones:b LLAVE_C        {: RESUL
 ;
 
 sbreak ::= BREAK:a PUNTOYCOMA   {: RESULT = new Break(aleft, aright); :}
+;
+
+scontinue ::= CONTINUE:a PUNTOYCOMA   {: RESULT = new Continue(aleft, aright); :}
 ;
 
 expresion ::= MENOS expresion:a                                     {: RESULT = new Aritmeticas(a, OperadoresAritmeticos.NEGACION, aleft, aright); :} %prec UMENOS

@@ -47,7 +47,7 @@ public class Lexer implements java_cup.runtime.Scanner {
     40, 34, 41, 42, 43, 44, 45, 46, 34, 34, 34, 51, 52, 53,  0,  0, 
      0,  0,  0,  0,  0,  3,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+     5,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
@@ -783,7 +783,7 @@ public class Lexer implements java_cup.runtime.Scanner {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [114] { listaErrores.add(new Errores(\"LEXICO\",\"El caracter \"+"+ZZ_NL+"                yytext()+\" no pertenece al lenguaje\", yyline, yycolumn)); }");
+            System.out.println("action [115] { listaErrores.add(new Errores(\"LEXICO\",\"El caracter \"+"+ZZ_NL+"                yytext()+\" no pertenece al lenguaje\", yyline, yycolumn)); }");
             { listaErrores.add(new Errores("LEXICO","El caracter "+
                 yytext()+" no pertenece al lenguaje", yyline, yycolumn));
             }
@@ -791,14 +791,14 @@ public class Lexer implements java_cup.runtime.Scanner {
           case 53: break;
           case 2:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [111] { /* Espacios en blanco se ignoran */ }");
+            System.out.println("action [112] { /* Espacios en blanco se ignoran */ }");
             { /* Espacios en blanco se ignoran */
             }
           // fall through
           case 54: break;
           case 3:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [98] {  }");
+            System.out.println("action [99] {  }");
             { 
             }
           // fall through
@@ -861,7 +861,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           case 63: break;
           case 12:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [100] { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }");
+            System.out.println("action [101] { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext());
             }
           // fall through
@@ -903,7 +903,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           case 69: break;
           case 18:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [104] { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }");
+            System.out.println("action [105] { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.ID, yycolumn, yyline, yytext());
             }
           // fall through
@@ -959,7 +959,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           case 77: break;
           case 26:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [101] { String cadAux = yytext();"+ZZ_NL+"                  cadAux = cadAux.substring(1, cadAux.length()-1);"+ZZ_NL+"                  return new Symbol(sym.CADENA, yycolumn, yyline, cadAux); }");
+            System.out.println("action [102] { String cadAux = yytext();"+ZZ_NL+"                  cadAux = cadAux.substring(1, cadAux.length()-1);"+ZZ_NL+"                  return new Symbol(sym.CADENA, yycolumn, yyline, cadAux); }");
             { String cadAux = yytext();
                   cadAux = cadAux.substring(1, cadAux.length()-1);
                   return new Symbol(sym.CADENA, yycolumn, yyline, cadAux);
@@ -1024,7 +1024,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           case 86: break;
           case 35:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [106] { char carAux = yytext().charAt(1);"+ZZ_NL+"                  return new Symbol(sym.CARACTER, yycolumn, yyline, carAux); }");
+            System.out.println("action [107] { char carAux = yytext().charAt(1);"+ZZ_NL+"                  return new Symbol(sym.CARACTER, yycolumn, yyline, carAux); }");
             { char carAux = yytext().charAt(1);
                   return new Symbol(sym.CARACTER, yycolumn, yyline, carAux);
             }
@@ -1032,7 +1032,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           case 87: break;
           case 36:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [99] { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext()); }");
+            System.out.println("action [100] { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext());
             }
           // fall through

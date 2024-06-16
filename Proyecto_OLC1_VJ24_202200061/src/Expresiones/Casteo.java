@@ -36,7 +36,7 @@ public class Casteo extends Instruccion {
             case CARACTER -> 
                 this.caracter(opU);
             default ->
-                new Errores("SEMANTICO", "OPERADOR INVALIDO", this.linea, this.columna);
+                new Errores("SEMANTICO", "No se puede realizar un casteo con el tipo " + this.TipoDatoCasteo.toString(), this.linea, this.columna);
         };
     }
     
@@ -56,7 +56,7 @@ public class Casteo extends Instruccion {
                 return AsciiValue;
             }
             default -> {
-                return new Errores("SEMANTICO", "Casteo Erroneo", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un casteo entre el tipo " + this.TipoDatoCasteo.toString() + " y el tipo " + tipoUnico.toString(), this.linea, this.columna);
             }
         }
     }
@@ -78,7 +78,7 @@ public class Casteo extends Instruccion {
                 return opUdec;
             } 
             default -> {
-                return new Errores("SEMANTICO", "Casteo Erroneo", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un casteo entre el tipo " + this.TipoDatoCasteo.toString() + " y el tipo " + tipoUnico.toString(), this.linea, this.columna);
             }
         }
     }
@@ -94,7 +94,7 @@ public class Casteo extends Instruccion {
                 return opUchar;
             }
             default -> {
-                return new Errores("SEMANTICO", "Casteo Erroneo", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un casteo entre el tipo " + this.TipoDatoCasteo.toString() + " y el tipo " + tipoUnico.toString(), this.linea, this.columna);
             }
         }
     }

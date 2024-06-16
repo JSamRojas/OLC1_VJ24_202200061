@@ -22,7 +22,7 @@ public class AccesoVariable extends Instruccion{
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         var valor = tabla.getVariable(this.ID);
         if(valor == null){
-            return new Errores("SEMANTICA", "Variable no existente",this.linea, this.columna);
+            return new Errores("SEMANTICA", "La variable " + this.ID.toString() + " no existe",this.linea, this.columna);
         }
         this.tipo.setTipo(valor.getTipo().getTipo());
         return valor.getValor();

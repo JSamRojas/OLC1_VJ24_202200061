@@ -30,12 +30,20 @@ public class FuncElseIf extends Instruccion {
         }
         
         if(this.condicion.tipo.getTipo() != DatoNativo.BOOLEANO){
-            return new Errores("SEMANTICO", "LA CONDICION DEL IF DEBE SER DE TIPO BOOLEANO",this.linea, this.columna);
+            return new Errores("SEMANTICO", "La condicion del if debe ser tipo booleano, no de tipo " + this.condicion.tipo.getTipo().toString(),this.linea, this.columna);
         }
         
         var newTabla = new TablaSimbolos(tabla);
         if((boolean) cond){
             for (var i : this.InstruccionesIF){
+                
+                if(i instanceof DeclaracionVar){
+                    ((DeclaracionVar) i).setEntorno(newTabla.getNombre());
+                }
+                
+                if(i == null){
+                    return null;
+                }
                 
                 if (i instanceof Break) {
                     return i;
@@ -53,7 +61,7 @@ public class FuncElseIf extends Instruccion {
                 
             }
         } else {
-            var resultado = this.NextIf.interpretar(arbol, tabla);     
+            this.NextIf.interpretar(arbol, tabla);     
         }
         return null;
     }

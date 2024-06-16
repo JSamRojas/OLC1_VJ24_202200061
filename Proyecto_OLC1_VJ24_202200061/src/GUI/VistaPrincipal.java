@@ -5,6 +5,7 @@ import Abstracto.Instruccion;
 import Simbolo.Arbol;
 import Simbolo.TablaSimbolos;
 import Funciones.Errores;
+import Funciones.Simbolos;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public static HashMap<String, JTextArea> Ventanas = new HashMap<>();
     public static int indice = 1;
     public static LinkedList<Errores> lista = new LinkedList<>();
+    public static LinkedList<Simbolos> listaSimbolos = new LinkedList<>();
+    public static int indSimbol = 1;
     
     public VistaPrincipal() {
         
@@ -210,6 +213,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem5);
 
         jMenuItem6.setText("Reporte de Tabla de Simbolos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
@@ -319,6 +327,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 tabla.setNombre("GLOBAL");
                 ast.setConsola("");
                 lista.clear();
+                listaSimbolos.clear();
                 lista.addAll(lexer.listaErrores);
                 lista.addAll(parser.listaErrores);
                 
@@ -431,6 +440,67 @@ public class VistaPrincipal extends javax.swing.JFrame {
             System.out.println("Error al guardar la tabla de Errores en el archivo: " + e.getMessage());
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+    
+    // REPORTE DE SIMBOLOS
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        
+        indSimbol = 1;
+        
+        StringBuilder htmlTable = new StringBuilder();
+        htmlTable.append("<html>");
+        htmlTable.append("<head>");
+        htmlTable.append("<title>Tabla de Simbolos</title>");
+        htmlTable.append("<style>");
+        htmlTable.append("body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }");
+        htmlTable.append("h1 { color: #333; }");
+        htmlTable.append("table { width: 100%; border-collapse: collapse; margin: 20px 0; }");
+        htmlTable.append("th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }");
+        htmlTable.append("th { background-color: #f2f2f2; color: #333; }");
+        htmlTable.append("tr:nth-child(even) { background-color: #f9f9f9; }");
+        htmlTable.append("tr:hover { background-color: #e0e0e0; }");
+        htmlTable.append("</style>");
+        htmlTable.append("</head>");
+        htmlTable.append("<body>");
+        htmlTable.append("<h1>Tabla de Simbolos</h1>");
+        htmlTable.append("<table border=\"1\">");
+        htmlTable.append("<tr>");
+        htmlTable.append("<th>Número</th>");
+        htmlTable.append("<th>ID</th>");
+        htmlTable.append("<th>Tipo (Estructura)</th>");
+        htmlTable.append("<th>Tipo (Dato)</th>");
+        htmlTable.append("<th>Entorno</th>");
+        htmlTable.append("<th>Valor</th>");
+        htmlTable.append("<th>Línea</th>");
+        htmlTable.append("<th>Columna</th>");
+        htmlTable.append("</tr>");
+        
+        for(var i: listaSimbolos){
+            htmlTable.append("<tr>");
+            htmlTable.append("<td>").append(indSimbol).append("</td>");
+            htmlTable.append("<td>").append(i.getNombre()).append("</td>");
+            htmlTable.append("<td>").append(i.getTipoEstruct()).append("</td>");
+            htmlTable.append("<td>").append(i.getTipo().getTipo().toString()).append("</td>");
+            htmlTable.append("<td>").append(i.getEntorno()).append("</td>");
+            htmlTable.append("<td>").append(i.getValor()).append("</td>");
+            htmlTable.append("<td>").append(i.getLinea()).append("</td>");
+            htmlTable.append("<td>").append(i.getColumna()).append("</td>");
+            htmlTable.append("</tr>");
+            indSimbol++;
+        } 
+        
+        htmlTable.append("</table>");
+        htmlTable.append("</body>");
+        htmlTable.append("</html>");
+        
+        String ruta = "src/TablaSimbolos.html";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))){
+            writer.write(htmlTable.toString());
+            System.out.println("Tabla de Simbolos generada y guardada en: " + ruta);
+        } catch (IOException e){
+            System.out.println("Error al guardar la tabla de Simbolos en el archivo: " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     public static void main(String args[]) {
        

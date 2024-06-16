@@ -28,7 +28,7 @@ public class FuncFor extends Instruccion {
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         
         var newTabla = new TablaSimbolos(tabla);
-        newTabla.setNombre(tabla.getNombre() + "-FOR");
+        newTabla.setNombre(tabla.getNombre() + " - FOR");
         
         var par1 = this.asignacion.interpretar(arbol, newTabla);
         if(par1 instanceof Errores){
@@ -41,18 +41,30 @@ public class FuncFor extends Instruccion {
         }
         
         if(this.condicion.tipo.getTipo() != DatoNativo.BOOLEANO){
-            return new Errores("SEMANTICO", "LA CONDICION DEBE SER BOOLEANA", this.linea, this.columna);
+            return new Errores("SEMANTICO", "La condicion del for debe ser tipo booleano, no de tipo " + this.condicion.tipo.getTipo().toString(), this.linea, this.columna);
         }
         
         while((boolean) this.condicion.interpretar(arbol, newTabla)){
             
             var newTabla2 = new TablaSimbolos(newTabla);
-            newTabla2.setNombre(tabla.getNombre() + "-FOR");
+            newTabla2.setNombre(tabla.getNombre() + " - FOR");
             
             for(var i : this.instruccionesFOR){
                 
+                if(i instanceof DeclaracionVar){
+                    ((DeclaracionVar) i).setEntorno(newTabla2.getNombre());
+                }
+                
+                if(i == null){
+                    return null;
+                }
+                
                 if (i instanceof Break) {
                     return null;
+                }
+                
+                if(i instanceof Continue){
+                    break;
                 }
                 
                 var resIns = i.interpretar(arbol, newTabla2);
@@ -63,6 +75,10 @@ public class FuncFor extends Instruccion {
                 
                 if (resIns instanceof Break) {
                     return null;
+                }
+                
+                if(resIns instanceof Continue){
+                    break;
                 }
                 
             }

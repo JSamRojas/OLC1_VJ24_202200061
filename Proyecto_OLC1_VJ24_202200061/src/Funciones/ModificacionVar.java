@@ -32,9 +32,9 @@ public class ModificacionVar extends Instruccion {
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         
         //COMPRUEBA QUE LA VARIABLE EXISTA
-        var variable = tabla.getVariable(ID);
+        var variable = tabla.getVariable(this.ID);
         if(variable == null){
-            return new Errores("SEMANTICO", "LA VARIABLE NO EXISTE", this.linea, this.columna);
+            return new Errores("SEMANTICO", "La variable con identificador " + this.ID.toString() + " no existe", this.linea, this.columna);
         }
         
         // IF PARA SABER SI LA MODIFICACION ES NORMAL, O ES DE AUMENTO - DECREMENTO
@@ -47,12 +47,13 @@ public class ModificacionVar extends Instruccion {
             }
 
             if(!variable.getMutabilidad()){
-                return new Errores("SEMANTICO", "LA VARIABLE NO PUEDE SER MODIFICADA", this.linea, this.columna);
+                return new Errores("SEMANTICO", "La variable " + this.ID.toString() + " es de tipo const, por lo que no se puede modificar", this.linea, this.columna);
             }
 
             //SE VALIDA QUE EL TIPO DE LA EXPRESION SEA IGUAL AL TIPO DE LA VARIABLE
             if(variable.getTipo().getTipo() != this.expresion.tipo.getTipo()){
-                return new Errores("SEMANTICO", "LA VARIABLE NO EXISTE", this.linea, this.columna);
+                return new Errores("SEMANTICO", "La variable tiene un tipo " + variable.getTipo().getTipo().toString() + 
+                " y se intento asignar un valor de tipo " + this.expresion.tipo.getTipo().toString(), this.linea, this.columna);
             }
 
             variable.setValor(nuevoValor);   
@@ -87,7 +88,7 @@ public class ModificacionVar extends Instruccion {
             }
             
             if(!variable.getMutabilidad()){
-                return new Errores("SEMANTICO", "LA VARIABLE NO PUEDE SER MODIFICADA", this.linea, this.columna);
+                return new Errores("SEMANTICO", "La variable " + this.ID.toString() + " es de tipo const, por lo que no se puede modificar", this.linea, this.columna);
             }
             
             variable.setValor(newValor);

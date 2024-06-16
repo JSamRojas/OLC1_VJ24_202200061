@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Expresiones;
 
 import Abstracto.Instruccion;
@@ -51,7 +48,7 @@ public class Relacionales extends Instruccion {
             case MAYORIGUAL ->
                 this.mayorigual(opIzq, opDer);
             default ->
-                new Errores("SEMANTICO", "OPERADOR INVALIDO", this.linea, this.columna);
+                new Errores("SEMANTICO",  "El operador " + this.operacion.toString() + " no puede utilizar en operaciones relacionales", this.linea, this.columna);
         };
     }
     
@@ -77,9 +74,6 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -89,11 +83,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una igualacion con el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -115,9 +106,6 @@ public class Relacionales extends Instruccion {
                             return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un decimal y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -127,11 +115,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una igualacion con el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -146,7 +131,7 @@ public class Relacionales extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una igualacion con el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -170,9 +155,6 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
                        if((char) op1 == (char) op2){
@@ -181,11 +163,8 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una igualacion con el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -200,12 +179,12 @@ public class Relacionales extends Instruccion {
                        }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una igualacion con el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una igualacion con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     } 
@@ -232,9 +211,6 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -244,11 +220,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una diferencia entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -270,9 +243,6 @@ public class Relacionales extends Instruccion {
                             return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un decimal y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -282,11 +252,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una diferencia entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -301,7 +268,7 @@ public class Relacionales extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una diferencia entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -325,9 +292,6 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
                        if((char) op1 != (char) op2){
@@ -336,11 +300,8 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una diferencia entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -355,12 +316,12 @@ public class Relacionales extends Instruccion {
                        }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una diferencia entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una diferencia con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -387,9 +348,6 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -399,11 +357,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -425,9 +380,6 @@ public class Relacionales extends Instruccion {
                             return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un decimal y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -437,11 +389,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -460,7 +409,7 @@ public class Relacionales extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -484,9 +433,6 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
                        if((char) op1 < (char) op2){
@@ -495,11 +441,8 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -514,12 +457,12 @@ public class Relacionales extends Instruccion {
                        }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una comparacion con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -546,9 +489,6 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -558,11 +498,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -584,9 +521,6 @@ public class Relacionales extends Instruccion {
                             return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un decimal y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -596,11 +530,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -619,7 +550,7 @@ public class Relacionales extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -643,9 +574,6 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
                        if((char) op1 <= (char) op2){
@@ -654,11 +582,8 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -673,12 +598,12 @@ public class Relacionales extends Instruccion {
                        }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una comparacion con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -705,9 +630,6 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -717,11 +639,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -743,9 +662,6 @@ public class Relacionales extends Instruccion {
                             return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un decimal y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -755,11 +671,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -778,7 +691,7 @@ public class Relacionales extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -802,9 +715,6 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
                        if((char) op1 > (char) op2){
@@ -813,11 +723,8 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -832,12 +739,12 @@ public class Relacionales extends Instruccion {
                        }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una comparacion con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -864,9 +771,6 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -876,11 +780,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -902,9 +803,6 @@ public class Relacionales extends Instruccion {
                             return false;
                         }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un decimal y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                         this.tipo.setTipo(DatoNativo.BOOLEANO);
                         int AsciiValue = (char) op2;
@@ -914,11 +812,8 @@ public class Relacionales extends Instruccion {
                            return false;
                         }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un entero y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -937,7 +832,7 @@ public class Relacionales extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -961,9 +856,6 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case BOOLEANO -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y un booleano", this.linea, this.columna);
-                    }
                     case CARACTER -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
                        if((char) op1 >= (char) op2){
@@ -972,11 +864,8 @@ public class Relacionales extends Instruccion {
                            return false;
                        }
                     }
-                    case CADENA -> {
-                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre un caracter y una cadena", this.linea, this.columna);
-                    }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
@@ -991,12 +880,12 @@ public class Relacionales extends Instruccion {
                        }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar una comparacion entre el tipo " + tipo1.toString() + " y el tipo " + tipo2.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar una comparacion con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }

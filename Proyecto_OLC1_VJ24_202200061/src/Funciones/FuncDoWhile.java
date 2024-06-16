@@ -28,7 +28,7 @@ public class FuncDoWhile extends Instruccion {
         }
         
         if(this.expresion.tipo.getTipo() != DatoNativo.BOOLEANO){
-            return new Errores("SEMANTICO", "LA CONDICION DEL IF DEBE SER DE TIPO BOOLEANO",this.linea, this.columna);
+            return new Errores("SEMANTICO", "La condicion del do while debe ser tipo booleano, no de tipo " + this.expresion.tipo.getTipo().toString(),this.linea, this.columna);
         }
         
         var newTabla = new TablaSimbolos(tabla);
@@ -38,18 +38,34 @@ public class FuncDoWhile extends Instruccion {
             
             for (var i : this.InstruccionesWHILE){
                 
+                if(i instanceof DeclaracionVar){
+                    ((DeclaracionVar) i).setEntorno(newTabla.getNombre());
+                }
+                
+                if(i == null){
+                    return null;
+                }
+                
                 if (i instanceof Break) {
-                    return i;
+                    return null;
+                }
+                
+                if (i instanceof Continue) {
+                    break;
                 }
                 
                 var resultado = i.interpretar(arbol, newTabla);
                 
                 if(resultado instanceof Errores){
-                    arbol.errores.add((Errores) resultado);
+                    return resultado;
                 }
                 
                 if (resultado instanceof Break) {
-                    return resultado;
+                    return null;
+                }
+                
+                if(resultado instanceof Continue){
+                    break;
                 }
                 
             }

@@ -58,7 +58,7 @@ public class Logicas extends Instruccion {
             case NOT ->
                 this.not(Unico);
             default -> 
-                new Errores("SEMANTICO", "OPERADOR INVALIDO", this.linea, this.columna);
+                new Errores("SEMANTICO", "El operador " + this.operacion.toString() + " no puede utilizar en operaciones logicas", this.linea, this.columna);
         };
     }
     
@@ -78,12 +78,12 @@ public class Logicas extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar un OR con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un OR con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -104,12 +104,12 @@ public class Logicas extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar un AND con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un AND con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -130,12 +130,12 @@ public class Logicas extends Instruccion {
                         }
                     }
                     default -> {
-                        return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                        return new Errores("SEMANTICO", "No se puede realizar un XOR con el tipo " + tipo2.toString() + " y el tipo " + tipo1.toString(), this.linea, this.columna);
                     }
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un XOR con el tipo " + tipo1.toString(), this.linea, this.columna);
             }
         }
     }
@@ -153,7 +153,7 @@ public class Logicas extends Instruccion {
                 }
             }
             default -> {
-                return new Errores("SEMANTICO", "Comparacion Erronea", this.linea, this.columna);
+                return new Errores("SEMANTICO", "No se puede realizar un NOT con el tipo " + opU.toString(), this.linea, this.columna);
             }
         }
     }

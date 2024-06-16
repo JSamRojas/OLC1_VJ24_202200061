@@ -29,6 +29,7 @@ public class FuncMatch extends Instruccion {
         }
         
         var newTabla = new TablaSimbolos(tabla);
+        newTabla.setNombre(tabla.getNombre() + " - MATCH");
         
         for(var cases : this.Casos ){
             
@@ -41,37 +42,49 @@ public class FuncMatch extends Instruccion {
                     if(caso == Cond){
                     
                         for(var inst : cases.InstruccionesCaso){
+                            
+                            if(inst instanceof DeclaracionVar){
+                                ((DeclaracionVar) inst).setEntorno(newTabla.getNombre());
+                            }
+                
+                            if(inst == null){
+                                return null;
+                            }
 
                             var resultado = inst.interpretar(arbol, newTabla);
 
                             if(resultado instanceof Errores){
-                                arbol.errores.add((Errores) resultado);
+                                return resultado;
                             } 
 
                         }
                         return null;
-                    
                     }
                     
                 } else {
-                    return new Errores("SEMANTICO", "LOS TIPOS DE LAS EXPRESIONES NO SON IGUALES", this.linea, this.columna);
+                    return new Errores("SEMANTICO", "la condicion del match es de tipo " + this.condicion.tipo.getTipo().toString() + " y el tipo del case es " + cases.tipo.getTipo().toString() , this.linea, this.columna);
                 }
 
             } else {
                 
                 for(var inst : cases.InstruccionesCaso){
                     
-                    var resultado = inst.interpretar(arbol, newTabla);
-                    
-                    if(resultado instanceof Errores){
-                        arbol.errores.add((Errores) resultado);
-                    } 
-                    
-                }
+                    if(inst instanceof DeclaracionVar){
+                        ((DeclaracionVar) inst).setEntorno(newTabla.getNombre());
+                    }
                 
+                    if(inst == null){
+                        return null;
+                    }
+                    
+                    var resultado = inst.interpretar(arbol, newTabla);
+  
+                    if(resultado instanceof Errores){
+                        return resultado;
+                    }   
+                }                
             }
         }
-        
         return null;
     }
 

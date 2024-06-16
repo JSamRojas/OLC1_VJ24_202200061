@@ -1,13 +1,71 @@
-var i: int = 0;
-var k: int = 0;
-while (i < 11) {
-    
-    println("Iteracion i" + i);
-    for(k = 0; k<=10 ; k++){
-      
-      println("Iteracion k" + k);
-      break;
+var a:int = 10;
 
-  }
-  i++;
-}
+        if (a == 10) {
+            var x:int = 5;
+            var y:int = 15;
+            println("a es igual a 10");
+            println("x: " + x + ", y: " + y);
+
+		if (a > 5) {
+            		var b:int = 20;
+            		var z:int = 25;
+            		println("a es mayor que 5");
+            		println("b: " + b + ", z: " + z);
+        	}
+        }
+
+        if (a < 20) {
+            var c:int = 30;
+            var d:int = 35;
+            println("a es menor que 20");
+            println("c: " + c + ", d: " + d);
+        }
+
+        if (a != 15) {
+            var e:int = 40;
+            var f:int = 45;
+            println("a no es igual a 15");
+            println("e: " + e + ", f: " + f);
+        }
+
+        if (a >= 10) {
+            var g:int = 50;
+            var h:int = 55;
+            println("a es mayor o igual a 10");
+            println("g: " + g + ", h: " + h);
+        }
+
+        if (a <= 10) {
+            var i:int = 60;
+            var j:int = 65;
+            println("a es menor o igual a 10");
+            println("i: " + i + ", j: " + j);
+        }
+
+        if (a % 2 == 0) {
+            var k:int = 70;
+            var l:int = 75;
+            println("a es un número par");
+            println("k: " + k + ", l: " + l);
+        }
+
+        if (a * 2 == 20) {
+            var m:int = 80;
+            var n:int = 85;
+            println("a multiplicado por 2 es igual a 20");
+            println("m: " + m + ", n: " + n);
+        }
+
+        if (a / 2 == 5) {
+            var o:int = 90;
+            var p:int = 95;
+            println("a dividido entre 2 es igual a 5");
+            println("o: " + o + ", p: " + p);
+        }
+
+        if (a + 10 == 20) {
+            var q:int = 100;
+            var r:int = 105;
+            println("a más 10 es igual a 20");
+            println("q: " + q + ", r: " + r);
+        }

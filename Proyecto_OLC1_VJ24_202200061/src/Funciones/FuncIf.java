@@ -36,12 +36,25 @@ public class FuncIf extends Instruccion {
         }
         
         if(this.condicion.tipo.getTipo() != DatoNativo.BOOLEANO){
-            return new Errores("SEMANTICO", "LA CONDICION DEL IF DEBE SER DE TIPO BOOLEANO",this.linea, this.columna);
+            return new Errores("SEMANTICO", "La condicion del if debe ser tipo booleano, no de tipo " + this.condicion.tipo.getTipo().toString(),this.linea, this.columna);
         }
         
         var newTabla = new TablaSimbolos(tabla);
+        newTabla.setNombre(tabla.getNombre() + "- IF");
         if((boolean) cond){
             for (var i : this.InstruccionesIF){
+                
+                if(i instanceof DeclaracionVar){
+                    ((DeclaracionVar) i).setEntorno(newTabla.getNombre());
+                }
+                
+                if(i == null){
+                    return null;
+                }
+                
+                if (i instanceof Continue) {
+                    return i;
+                }
                 
                 if (i instanceof Break) {
                     return i;
@@ -50,10 +63,14 @@ public class FuncIf extends Instruccion {
                 var resultado = i.interpretar(arbol, newTabla);
                 
                 if(resultado instanceof Errores){
-                    arbol.errores.add((Errores) resultado);
+                    return resultado;
                 }
                 
                 if (resultado instanceof Break) {
+                    return resultado;
+                }
+                
+                if (resultado instanceof Continue) {
                     return resultado;
                 }
                 
@@ -63,17 +80,38 @@ public class FuncIf extends Instruccion {
             if(this.InstruccionesELSE != null){
                 
                 for (var i : this.InstruccionesELSE){
+                    
+                    if(i instanceof DeclaracionVar){
+                        ((DeclaracionVar) i).setEntorno(newTabla.getNombre());
+                    }
+                
+                    if(i == null){
+                        return null;
+                    }
+                    
                     if (i instanceof Break) {
+                        return i;
+                    }
+                    
+                    if(i instanceof Continue){
                         return i;
                     }
                 
                     var resultado = i.interpretar(arbol, newTabla);
+                    
+                    if(resultado == null){
+                        return null;
+                    }
 
                     if(resultado instanceof Errores){
-                        arbol.errores.add((Errores) resultado);
+                        return resultado;
                     }
 
                     if (resultado instanceof Break) {
+                        return resultado;
+                    }
+                    
+                    if (resultado instanceof Continue) {
                         return resultado;
                     }
                 }
