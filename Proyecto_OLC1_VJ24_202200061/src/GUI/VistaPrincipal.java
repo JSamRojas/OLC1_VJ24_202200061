@@ -433,7 +433,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         htmlTable.append("</body>");
         htmlTable.append("</html>");
         
-        String ruta = "src/ReporteErrores.html";
+        String ruta = "C:\\Users\\Rojas\\Downloads\\ReporteErrores.html";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))){
             writer.write(htmlTable.toString());
             System.out.println("Tabla de Errores generada y guardada en: " + ruta);
@@ -493,7 +493,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         htmlTable.append("</body>");
         htmlTable.append("</html>");
         
-        String ruta = "src/TablaSimbolos.html";
+        String ruta = "C:\\Users\\Rojas\\Downloads\\TabladeSimbolos.html";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))){
             writer.write(htmlTable.toString());
             System.out.println("Tabla de Simbolos generada y guardada en: " + ruta);
