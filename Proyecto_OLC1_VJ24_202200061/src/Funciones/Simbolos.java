@@ -19,12 +19,12 @@ public class Simbolos {
         this.mutabilidad = mutabilidad;
     }
 
-    public Simbolos(String nombre, Tipo tipo, Object valor, boolean mutabilidad, int linea, int columna) {
+    public Simbolos(String nombre, Tipo tipo, Object valor, boolean mutabilidad, String TipoEstruct, int linea, int columna) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.valor = valor;
         this.mutabilidad = mutabilidad;
-        this.TipoEstruct = "Variable";
+        this.TipoEstruct = TipoEstruct;
         this.Entorno = "";
         this.linea = linea;
         this.columna = columna;

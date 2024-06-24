@@ -2,10 +2,15 @@
 package GUI;
 
 import Abstracto.Instruccion;
+import Funciones.DeclaracionArr;
 import Simbolo.Arbol;
 import Simbolo.TablaSimbolos;
 import Funciones.Errores;
 import Funciones.Simbolos;
+import Funciones.DeclaracionVar;
+import Funciones.Metodos;
+import Funciones.ModificacionVar;
+import Funciones.StartWith;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -307,6 +312,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    
     // FUNCION REALIZAR COMPILACION
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         
@@ -327,24 +333,60 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 var tabla = new TablaSimbolos();
                 tabla.setNombre("GLOBAL");
                 ast.setConsola("");
+                ast.setTablaGlobal(tabla);
                 lista.clear();
                 listaSimbolos.clear();
                 lista.addAll(lexer.listaErrores);
                 lista.addAll(parser.listaErrores);
                 
+                // PRIMERA VUELTA AL ARBOL (GUARDAR METODOS, FUNCIONES Y STRUCTS)
                 for(var a : ast.getInstrucciones()){
                     if(a == null){
                         continue;
                     }
                     
-                    var res = a.interpretar(ast, tabla);
-                    if(res instanceof Errores){
-                        lista.add((Errores) res);
+                    if(a instanceof Metodos){
+                        ast.addFuncMetod(a);
                     }
                 }
                 
+                // SEGUNDA VUELTA AL ARBOL (DECLARACION DE VARIABLES, ARREGLOS Y LISTAS GLOBALES)
+                for(var a : ast.getInstrucciones()){
+                    if(a == null){
+                        continue;
+                    }
+                    
+                    if(a instanceof DeclaracionVar || a instanceof ModificacionVar || a instanceof DeclaracionArr){
+                        var res = a.interpretar(ast, tabla);
+                        if(res instanceof Errores errores){
+                            lista.add(errores);
+                        }
+                    }
+                }
+                
+                // TERCERA VUELTA AL ARBOL (BUSCAR INSTRUCCION START_WITH)
+                StartWith s = null;
+                for (var a : ast.getInstrucciones()) {
+                    if (a == null) {
+                        continue;
+                    }
+                    if (a instanceof StartWith start) {
+                        s = start;
+                        break;
+                    }
+                }
+                
+                if(s != null){
+                    var resultadoExecute = s.interpretar(ast, tabla);
+                    
+                    if(resultadoExecute instanceof Errores){
+                        System.out.println("Ya no sale compi1");
+                    }
+                    
+                }
+                
                 String consola = ast.getConsola();
-
+                lista.addAll(ast.errores);
                 for (var i : lista){
                     consola += i + "\n";
                 }
@@ -361,9 +403,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se puede Ejecutar esa Pestaña");
             
         }
-   
+        
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-
+    
+    
+    
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         
         JFileChooser fc = new JFileChooser("D:\\USAC\\VACACIONES JUNIO 2024\\LAB COMPI 1 VACIONES 2024\\OLC1_VJ24_202200061");

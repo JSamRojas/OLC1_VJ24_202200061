@@ -7,7 +7,8 @@ import Abstracto.Instruccion;
 import Simbolo.Tipo;
 import Simbolo.DatoNativo;
 import java.util.LinkedList;
-import Funciones.Errores;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 //instrucciones
 import Funciones.*;
@@ -52,28 +53,31 @@ action code
 
 terminal String ENTERO, DECIMAL, ID, CADENA, TRUE, FALSE;
 terminal char CARACTER;
-terminal String DOSPUNTOS, PUNTOYCOMA;
+terminal String DOSPUNTOS, PUNTOYCOMA, COMA;
 terminal String IGUAL, DOSIGUAL;
 terminal String SUMA, MENOS, POR, DIVISION, POTENCIA, MOD;
 terminal String DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
 terminal String OR, AND, XOR, NOT, DO, WHILE;
 terminal String PARENTESIS_A, PARENTESIS_C, LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C, GUIONBAJO;
 terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN, DOUBLE, ELSE, MATCH, FOR;
-terminal String BREAK, CONTINUE;
+terminal String BREAK, CONTINUE, VOID, STARTWITH;
 terminal UMENOS;
 
 
 //------> Declaración de no terminales
 
-non terminal LinkedList<Instruccion> inicio, instrucciones;
+non terminal LinkedList<Instruccion> inicio, instrucciones, listaexpresiones, listaparams;
 non terminal Instruccion instruccion;
 non terminal Instruccion declaracion, imprimir, modificacion, sif, smatch, scontinue;
 non terminal Instruccion expresion, sfor, swhile, act_for, sbreak, sdowhile;
+non terminal Instruccion metodo, sstartwith;
 non terminal DatoNativo tiposCasteo;
+non terminal LinkedList<HashMap> params;
 non terminal Tipo tipos;
 non terminal TipoMutabilidad mutabilidad;
 non terminal LinkedList<CasosMatch> casos;
 non terminal CasosMatch caso;
+non terminal LinkedList<ArrayList<Instruccion>> listaexp2D;
 
 //------> Declaración de precedencias
 
@@ -109,6 +113,8 @@ instruccion ::= imprimir:a          {: RESULT = a; :}
              |  sbreak:a            {: RESULT = a; :}
              |  sdowhile:a          {: RESULT = a; :}
              |  scontinue:a         {: RESULT = a; :}
+             |  metodo:a            {: RESULT = a; :}
+             |  sstartwith:a        {: RESULT = a; :}
              |  error PUNTOYCOMA
 ;
 
@@ -117,11 +123,31 @@ imprimir ::= PRINTLN PARENTESIS_A expresion:a PARENTESIS_C PUNTOYCOMA {: RESULT 
 
 declaracion ::= mutabilidad:a ID:b DOSPUNTOS tipos:c IGUAL expresion:d PUNTOYCOMA     {: RESULT = new DeclaracionVar(b, d, a, c, aleft, aright); :}
               | mutabilidad:a ID:b DOSPUNTOS tipos:c PUNTOYCOMA                       {: RESULT = new DeclaracionVar(b, null, a, c, aleft, aright); :}
+              | mutabilidad:a ID:b DOSPUNTOS tipos:c CORCHETE_A CORCHETE_C IGUAL CORCHETE_A listaexpresiones:d CORCHETE_C PUNTOYCOMA    
+                                {: RESULT = new DeclaracionArr(a, b, d, new LinkedList<ArrayList<Instruccion>>(), c, aleft, aright); :}
+              | mutabilidad:a ID:b DOSPUNTOS tipos:c CORCHETE_A CORCHETE_C CORCHETE_A CORCHETE_C IGUAL CORCHETE_A listaexp2D:d CORCHETE_C PUNTOYCOMA    
+                                {: RESULT = new DeclaracionArr(a, b, new LinkedList<Instruccion>(), d, c, aleft, aright); :}
 ;
 
 modificacion ::= ID:a IGUAL expresion:b PUNTOYCOMA              {: RESULT = new ModificacionVar(a, b, aleft, aright); :}
                | ID:a SUMA SUMA PUNTOYCOMA                      {: RESULT = new ModificacionVar(a, ModificadoresVar.AUMENTO, aleft, aright); :}
                | ID:a MENOS MENOS PUNTOYCOMA                    {: RESULT = new ModificacionVar(a, ModificadoresVar.DECREMENTO, aleft, aright); :}
+;
+
+metodo ::= tipos:a ID:b PARENTESIS_A params:c PARENTESIS_C LLAVE_A instrucciones:d LLAVE_C       {: RESULT = new Metodos(b, c, d, a, aleft, aright); :}
+         | tipos:a ID:b PARENTESIS_A PARENTESIS_C LLAVE_A instrucciones:c LLAVE_C                {: RESULT = new Metodos(b, new LinkedList<HashMap>(), c, a, aleft, aright); :}
+;
+
+sstartwith ::= STARTWITH ID:a PARENTESIS_A listaparams:b PARENTESIS_C PUNTOYCOMA        {: RESULT = new StartWith(a, b, aleft, aright); :}
+             | STARTWITH ID:a PARENTESIS_A PARENTESIS_C PUNTOYCOMA                      {: RESULT = new StartWith(a, new LinkedList<Instruccion>(), aleft, aright); :}
+;
+
+listaparams ::= listaparams:a COMA expresion:b          {: RESULT = a; RESULT.add(b); :}
+              | expresion:a                             {: RESULT = new LinkedList<Instruccion>(); RESULT.add(a); :}
+;
+
+params ::= params:a COMA tipos:b ID:c           {: RESULT = a; var hm = new HashMap<String, Object>(); hm.put("id", c); hm.put("tipo", b); RESULT.add(hm); :}
+         | tipos:a ID:b                         {: RESULT = new LinkedList<HashMap>(); var hm2 = new HashMap<String, Object>(); hm2.put("id", b); hm2.put("tipo", a); RESULT.add(hm2); :}
 ;
 
 sif ::= IF PARENTESIS_A expresion:a PARENTESIS_C LLAVE_A instrucciones:b LLAVE_C                                        {: RESULT = new FuncIf(a, b, aleft, aright); :}
@@ -145,6 +171,23 @@ act_for ::= ID:a IGUAL expresion:b               {: RESULT = new ModificacionVar
 ;
 
 smatch ::= MATCH expresion:a LLAVE_A casos:b LLAVE_C             {: RESULT = new FuncMatch(a, b, aleft, aright); :}
+;
+
+listaexpresiones ::= listaexpresiones:a COMA expresion:b        {: RESULT = a; RESULT.add(b); :}
+                   | expresion:a                                {: RESULT = new LinkedList<>(); RESULT.add(a); :}                             
+;          
+
+listaexp2D ::= listaexp2D:a COMA CORCHETE_A expresion:b COMA expresion:c CORCHETE_C     {: RESULT = a; 
+                                                                                           var arr2D1 = new ArrayList<Instruccion>();
+                                                                                           arr2D1.add(b);
+                                                                                           arr2D1.add(c);
+                                                                                           RESULT.add(arr2D1); :}
+
+             | CORCHETE_A expresion:a COMA expresion:b CORCHETE_C                       {: RESULT = new LinkedList<ArrayList<Instruccion>>(); 
+                                                                                           var arr2D2 = new ArrayList<Instruccion>();
+                                                                                           arr2D2.add(a);
+                                                                                           arr2D2.add(b);
+                                                                                           RESULT.add(arr2D2); :}
 ;
 
 casos ::= casos:a caso:b        {: RESULT = a; RESULT.add(b); :}
@@ -199,6 +242,7 @@ tipos ::= INT           {:   RESULT=new Tipo(DatoNativo.ENTERO);   :}
         | STRING        {:   RESULT=new Tipo(DatoNativo.CADENA);   :}
         | CHAR          {:   RESULT=new Tipo(DatoNativo.CARACTER);   :}
         | BOOLEANO      {:   RESULT=new Tipo(DatoNativo.BOOLEANO);   :}
+        | VOID          {:   RESULT=new Tipo(DatoNativo.VOID);   :}
 ;
 
 mutabilidad ::= VAR     {:   RESULT = TipoMutabilidad.VAR;   :}

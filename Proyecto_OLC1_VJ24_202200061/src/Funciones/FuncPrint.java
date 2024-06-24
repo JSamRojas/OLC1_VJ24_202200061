@@ -24,11 +24,6 @@ public class FuncPrint extends Instruccion {
             return resultado;
         }
         String consola = resultado.toString();
-        consola = consola.replace("\\n", "\n"); // reemplaza la secuencia de escape \n
-        consola = consola.replace("\\\\", "\\"); // reemplaza la secuencia de escape \\
-        consola = consola.replace("\\\"", "\""); // reemplaza la secuencia de escape \"
-        consola = consola.replace("\\t", "\t"); // reemplaza la secuencia de escape \t
-        consola = consola.replace("\\'", "'"); // reemplaza la secuencia de escape \'
         arbol.Print(consola);
         return null;
     }

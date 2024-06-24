@@ -24,12 +24,13 @@ public class CasosMatch extends Instruccion {
 
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
-        
+
         var Caso = this.expresion.interpretar(arbol, tabla);
         
         if(Caso instanceof Errores){
             return Caso;
         }
+        
         this.tipo.setTipo(this.expresion.tipo.getTipo());
         return Caso;  
     }
