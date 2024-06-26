@@ -3,6 +3,7 @@ package Funciones;
 
 import Abstracto.Instruccion;
 import java.util.LinkedList;
+import Expresiones.*;
 import Simbolo.*;
 import java.util.HashMap;
 

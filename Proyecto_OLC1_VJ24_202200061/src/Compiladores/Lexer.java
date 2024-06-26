@@ -64,19 +64,20 @@ public class Lexer implements java_cup.runtime.Scanner {
   private static final String ZZ_ACTION_PACKED_0 =
     "\2\0\1\1\1\2\1\3\1\4\1\5\2\1\1\6"+
     "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\20\1\21\1\22\15\23\1\24\1\25\1\26"+
-    "\1\27\1\30\1\1\1\31\1\32\1\33\1\32\1\34"+
-    "\1\35\1\0\1\36\1\0\1\2\1\0\1\37\1\40"+
-    "\1\41\4\23\1\42\3\23\1\43\10\23\1\44\1\45"+
-    "\1\46\1\47\1\50\1\51\1\52\1\53\1\54\1\0"+
-    "\1\55\7\23\1\56\1\57\5\23\1\60\2\23\1\2"+
-    "\1\61\1\23\1\62\3\23\1\63\5\23\1\64\1\65"+
-    "\1\23\1\66\1\67\2\23\1\70\1\71\3\23\1\72"+
-    "\1\23\1\73\2\23\1\74\1\23\1\75\1\23\1\76"+
-    "\2\23\1\77";
+    "\1\17\1\20\1\21\1\22\1\23\21\24\1\25\1\26"+
+    "\1\27\1\30\1\31\1\1\1\32\1\33\1\34\1\33"+
+    "\1\35\1\36\1\0\1\37\1\0\1\2\1\0\1\40"+
+    "\1\41\1\42\5\24\1\43\3\24\1\44\13\24\1\45"+
+    "\1\46\1\47\1\50\1\51\1\52\1\53\1\54\1\55"+
+    "\1\0\1\56\10\24\1\57\1\60\2\24\1\61\5\24"+
+    "\1\62\2\24\1\2\1\24\1\63\1\24\1\64\3\24"+
+    "\1\65\1\24\1\66\5\24\1\67\1\70\2\24\1\71"+
+    "\1\72\2\24\1\73\1\74\4\24\1\75\1\76\1\24"+
+    "\1\77\1\24\1\100\1\24\1\101\1\24\1\102\1\24"+
+    "\1\103\2\24\1\104";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[138];
+    int [] result = new int[158];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -102,26 +103,28 @@ public class Lexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\67\0\156\0\245\0\334\0\156\0\156\0\u0113"+
-    "\0\u014a\0\156\0\156\0\u0181\0\156\0\156\0\156\0\u01b8"+
-    "\0\u01ef\0\156\0\156\0\u0226\0\u025d\0\u0294\0\u02cb\0\u0302"+
-    "\0\u0339\0\u0370\0\u03a7\0\u03de\0\u0415\0\u044c\0\u0483\0\u04ba"+
-    "\0\u04f1\0\u0528\0\u055f\0\156\0\156\0\156\0\156\0\156"+
-    "\0\u0596\0\156\0\156\0\156\0\u05cd\0\156\0\156\0\u0604"+
-    "\0\156\0\u063b\0\u0672\0\u06a9\0\156\0\156\0\156\0\u06e0"+
-    "\0\u0717\0\u074e\0\u0785\0\u07bc\0\u07f3\0\u082a\0\u0861\0\u02cb"+
-    "\0\u0898\0\u08cf\0\u0906\0\u093d\0\u0974\0\u09ab\0\u09e2\0\u0a19"+
-    "\0\156\0\156\0\156\0\156\0\156\0\156\0\156\0\156"+
-    "\0\156\0\u0a50\0\u06a9\0\u0a87\0\u0abe\0\u0af5\0\u0b2c\0\u0b63"+
-    "\0\u0b9a\0\u0bd1\0\u02cb\0\u02cb\0\u0c08\0\u0c3f\0\u0c76\0\u0cad"+
-    "\0\u0ce4\0\u02cb\0\u0d1b\0\u0d52\0\u063b\0\u02cb\0\u0d89\0\u02cb"+
-    "\0\u0dc0\0\u0df7\0\u0e2e\0\u02cb\0\u0e65\0\u0e9c\0\u0ed3\0\u0f0a"+
-    "\0\u0f41\0\u02cb\0\u02cb\0\u0f78\0\u02cb\0\u02cb\0\u0faf\0\u0fe6"+
-    "\0\u02cb\0\u02cb\0\u101d\0\u1054\0\u108b\0\u02cb\0\u10c2\0\u02cb"+
-    "\0\u10f9\0\u1130\0\u02cb\0\u1167\0\u02cb\0\u119e\0\u02cb\0\u11d5"+
-    "\0\u120c\0\u02cb";
+    "\0\u014a\0\156\0\156\0\u0181\0\156\0\156\0\156\0\156"+
+    "\0\u01b8\0\u01ef\0\156\0\156\0\u0226\0\u025d\0\u0294\0\u02cb"+
+    "\0\u0302\0\u0339\0\u0370\0\u03a7\0\u03de\0\u0415\0\u044c\0\u0483"+
+    "\0\u04ba\0\u04f1\0\u0528\0\u055f\0\u0596\0\u05cd\0\u0604\0\u063b"+
+    "\0\156\0\156\0\156\0\156\0\156\0\u0672\0\156\0\156"+
+    "\0\156\0\u06a9\0\156\0\156\0\u06e0\0\156\0\u0717\0\u074e"+
+    "\0\u0785\0\156\0\156\0\156\0\u07bc\0\u07f3\0\u082a\0\u0861"+
+    "\0\u0898\0\u08cf\0\u0906\0\u093d\0\u0974\0\u02cb\0\u09ab\0\u09e2"+
+    "\0\u0a19\0\u0a50\0\u0a87\0\u0abe\0\u0af5\0\u0b2c\0\u0b63\0\u0b9a"+
+    "\0\u0bd1\0\156\0\156\0\156\0\156\0\156\0\156\0\156"+
+    "\0\156\0\156\0\u0c08\0\u0785\0\u0c3f\0\u0c76\0\u0cad\0\u0ce4"+
+    "\0\u0d1b\0\u0d52\0\u0d89\0\u0dc0\0\u02cb\0\u02cb\0\u0df7\0\u0e2e"+
+    "\0\u02cb\0\u0e65\0\u0e9c\0\u0ed3\0\u0f0a\0\u0f41\0\u02cb\0\u0f78"+
+    "\0\u0faf\0\u0717\0\u0fe6\0\u02cb\0\u101d\0\u02cb\0\u1054\0\u108b"+
+    "\0\u10c2\0\u02cb\0\u10f9\0\u02cb\0\u1130\0\u1167\0\u119e\0\u11d5"+
+    "\0\u120c\0\u02cb\0\u02cb\0\u1243\0\u127a\0\u02cb\0\u02cb\0\u12b1"+
+    "\0\u12e8\0\u02cb\0\u02cb\0\u131f\0\u1356\0\u138d\0\u13c4\0\u02cb"+
+    "\0\u02cb\0\u13fb\0\u02cb\0\u1432\0\u02cb\0\u1469\0\u02cb\0\u14a0"+
+    "\0\u02cb\0\u14d7\0\u02cb\0\u150e\0\u1545\0\u02cb";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[138];
+    int [] result = new int[158];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -145,88 +148,104 @@ public class Lexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\3\2\4\1\0\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\3"+
-    "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\2\27"+
-    "\1\30\1\31\1\32\1\33\1\34\2\27\1\35\3\27"+
-    "\1\36\2\27\1\37\1\27\1\40\1\41\1\27\1\42"+
-    "\1\43\1\44\1\3\1\45\1\46\1\47\1\50\1\51"+
-    "\1\52\6\53\1\54\51\53\1\55\6\53\70\0\2\4"+
-    "\1\0\1\4\110\0\1\56\50\0\1\57\56\0\2\60"+
-    "\1\0\6\60\1\0\55\60\14\0\1\61\66\0\1\62"+
-    "\4\0\1\63\65\0\1\64\1\0\1\21\72\0\1\65"+
-    "\66\0\1\66\66\0\1\67\62\0\1\27\6\0\26\27"+
-    "\4\0\1\27\25\0\1\27\6\0\16\27\1\70\1\27"+
-    "\1\71\5\27\4\0\1\27\25\0\1\27\6\0\7\27"+
-    "\1\72\6\27\1\73\7\27\4\0\1\27\25\0\1\27"+
-    "\6\0\16\27\1\74\7\27\4\0\1\27\25\0\1\27"+
-    "\6\0\13\27\1\75\12\27\4\0\1\27\25\0\1\27"+
-    "\6\0\1\76\15\27\1\77\7\27\4\0\1\27\25\0"+
-    "\1\27\6\0\5\27\1\100\7\27\1\101\10\27\4\0"+
-    "\1\27\25\0\1\27\6\0\1\102\25\27\4\0\1\27"+
-    "\25\0\1\27\6\0\20\27\1\103\5\27\4\0\1\27"+
-    "\25\0\1\27\6\0\22\27\1\104\3\27\4\0\1\27"+
-    "\25\0\1\27\6\0\20\27\1\105\5\27\4\0\1\27"+
-    "\25\0\1\27\6\0\1\106\15\27\1\107\7\27\4\0"+
-    "\1\27\25\0\1\27\6\0\7\27\1\110\16\27\4\0"+
-    "\1\27\70\0\1\111\7\0\1\112\2\0\1\113\24\0"+
-    "\1\114\7\0\1\115\2\0\1\116\1\0\1\117\4\0"+
-    "\1\120\17\0\1\121\55\0\14\62\1\122\52\62\2\63"+
-    "\3\0\62\63\22\0\1\123\66\0\1\27\6\0\16\27"+
-    "\1\124\7\27\4\0\1\27\25\0\1\27\6\0\4\27"+
-    "\1\125\21\27\4\0\1\27\25\0\1\27\6\0\1\126"+
-    "\25\27\4\0\1\27\25\0\1\27\6\0\15\27\1\127"+
-    "\10\27\4\0\1\27\25\0\1\27\6\0\23\27\1\130"+
-    "\2\27\4\0\1\27\25\0\1\27\6\0\21\27\1\131"+
-    "\4\27\4\0\1\27\25\0\1\27\6\0\13\27\1\132"+
-    "\12\27\4\0\1\27\25\0\1\27\6\0\20\27\1\133"+
-    "\5\27\4\0\1\27\25\0\1\27\6\0\22\27\1\134"+
-    "\3\27\4\0\1\27\25\0\1\27\6\0\22\27\1\135"+
-    "\3\27\4\0\1\27\25\0\1\27\6\0\10\27\1\136"+
-    "\15\27\4\0\1\27\25\0\1\27\6\0\1\137\17\27"+
-    "\1\140\5\27\4\0\1\27\25\0\1\27\6\0\23\27"+
-    "\1\141\2\27\4\0\1\27\25\0\1\27\6\0\20\27"+
-    "\1\142\5\27\4\0\1\27\25\0\1\27\6\0\10\27"+
-    "\1\143\15\27\4\0\1\27\25\0\1\27\6\0\10\27"+
-    "\1\144\15\27\4\0\1\27\3\0\14\62\1\122\4\62"+
-    "\1\145\45\62\22\0\1\27\6\0\13\27\1\146\12\27"+
-    "\4\0\1\27\25\0\1\27\6\0\1\147\25\27\4\0"+
-    "\1\27\25\0\1\27\6\0\20\27\1\150\5\27\4\0"+
-    "\1\27\25\0\1\27\6\0\21\27\1\151\1\152\3\27"+
-    "\4\0\1\27\25\0\1\27\6\0\1\27\1\153\24\27"+
-    "\4\0\1\27\25\0\1\27\6\0\4\27\1\154\21\27"+
-    "\4\0\1\27\25\0\1\27\6\0\21\27\1\155\4\27"+
-    "\4\0\1\27\25\0\1\27\6\0\2\27\1\156\23\27"+
-    "\4\0\1\27\25\0\1\27\6\0\15\27\1\157\10\27"+
-    "\4\0\1\27\25\0\1\27\6\0\20\27\1\160\5\27"+
-    "\4\0\1\27\25\0\1\27\6\0\10\27\1\161\15\27"+
-    "\4\0\1\27\25\0\1\27\6\0\4\27\1\162\21\27"+
-    "\4\0\1\27\25\0\1\27\6\0\3\27\1\163\22\27"+
-    "\4\0\1\27\25\0\1\27\6\0\13\27\1\164\12\27"+
-    "\4\0\1\27\25\0\1\27\6\0\12\27\1\165\13\27"+
-    "\4\0\1\27\25\0\1\27\6\0\22\27\1\166\3\27"+
-    "\4\0\1\27\25\0\1\27\6\0\10\27\1\167\15\27"+
-    "\4\0\1\27\25\0\1\27\6\0\13\27\1\170\12\27"+
-    "\4\0\1\27\25\0\1\27\6\0\4\27\1\171\21\27"+
-    "\4\0\1\27\25\0\1\27\6\0\7\27\1\172\16\27"+
-    "\4\0\1\27\25\0\1\27\6\0\22\27\1\173\3\27"+
-    "\4\0\1\27\25\0\1\27\6\0\22\27\1\174\3\27"+
-    "\4\0\1\27\25\0\1\27\6\0\15\27\1\175\10\27"+
-    "\4\0\1\27\25\0\1\27\6\0\4\27\1\176\21\27"+
-    "\4\0\1\27\25\0\1\27\6\0\15\27\1\177\10\27"+
-    "\4\0\1\27\25\0\1\27\6\0\4\27\1\200\21\27"+
-    "\4\0\1\27\25\0\1\27\6\0\13\27\1\201\12\27"+
-    "\4\0\1\27\25\0\1\27\6\0\26\27\4\0\1\202"+
-    "\25\0\1\27\6\0\6\27\1\203\17\27\4\0\1\27"+
-    "\25\0\1\27\6\0\23\27\1\204\2\27\4\0\1\27"+
-    "\25\0\1\27\6\0\15\27\1\205\10\27\4\0\1\27"+
-    "\25\0\1\27\6\0\25\27\1\206\4\0\1\27\25\0"+
-    "\1\27\6\0\4\27\1\207\21\27\4\0\1\27\25\0"+
-    "\1\27\6\0\10\27\1\210\15\27\4\0\1\27\25\0"+
-    "\1\27\6\0\22\27\1\211\3\27\4\0\1\27\25\0"+
-    "\1\27\6\0\7\27\1\212\16\27\4\0\1\27\3\0";
+    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
+    "\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30"+
+    "\1\31\1\32\1\33\1\34\1\35\1\36\2\30\1\37"+
+    "\2\30\1\40\1\41\1\42\1\30\1\43\1\44\1\45"+
+    "\1\46\1\30\1\47\1\50\1\51\1\3\1\52\1\53"+
+    "\1\54\1\55\1\56\1\57\6\60\1\61\51\60\1\62"+
+    "\6\60\70\0\2\4\1\0\1\4\110\0\1\63\50\0"+
+    "\1\64\56\0\2\65\1\0\6\65\1\0\55\65\14\0"+
+    "\1\66\66\0\1\67\4\0\1\70\65\0\1\71\1\0"+
+    "\1\22\72\0\1\72\66\0\1\73\66\0\1\74\62\0"+
+    "\1\30\6\0\26\30\4\0\1\30\25\0\1\30\6\0"+
+    "\17\30\1\75\6\30\4\0\1\30\25\0\1\30\6\0"+
+    "\16\30\1\76\1\30\1\77\5\30\4\0\1\30\25\0"+
+    "\1\30\6\0\7\30\1\100\6\30\1\101\7\30\4\0"+
+    "\1\30\25\0\1\30\6\0\16\30\1\102\7\30\4\0"+
+    "\1\30\25\0\1\30\6\0\13\30\1\103\12\30\4\0"+
+    "\1\30\25\0\1\30\6\0\1\104\15\30\1\105\7\30"+
+    "\4\0\1\30\25\0\1\30\6\0\5\30\1\106\7\30"+
+    "\1\107\10\30\4\0\1\30\25\0\1\30\6\0\10\30"+
+    "\1\110\15\30\4\0\1\30\25\0\1\30\6\0\1\111"+
+    "\25\30\4\0\1\30\25\0\1\30\6\0\4\30\1\112"+
+    "\21\30\4\0\1\30\25\0\1\30\6\0\20\30\1\113"+
+    "\5\30\4\0\1\30\25\0\1\30\6\0\4\30\1\114"+
+    "\21\30\4\0\1\30\25\0\1\30\6\0\22\30\1\115"+
+    "\3\30\4\0\1\30\25\0\1\30\6\0\20\30\1\116"+
+    "\5\30\4\0\1\30\25\0\1\30\6\0\1\117\15\30"+
+    "\1\120\7\30\4\0\1\30\25\0\1\30\6\0\7\30"+
+    "\1\121\16\30\4\0\1\30\70\0\1\122\7\0\1\123"+
+    "\2\0\1\124\24\0\1\125\7\0\1\126\2\0\1\127"+
+    "\1\0\1\130\4\0\1\131\17\0\1\132\55\0\14\67"+
+    "\1\133\52\67\2\70\3\0\62\70\22\0\1\134\66\0"+
+    "\1\30\6\0\17\30\1\135\6\30\4\0\1\30\25\0"+
+    "\1\30\6\0\16\30\1\136\7\30\4\0\1\30\25\0"+
+    "\1\30\6\0\4\30\1\137\21\30\4\0\1\30\25\0"+
+    "\1\30\6\0\1\140\25\30\4\0\1\30\25\0\1\30"+
+    "\6\0\15\30\1\141\10\30\4\0\1\30\25\0\1\30"+
+    "\6\0\23\30\1\142\2\30\4\0\1\30\25\0\1\30"+
+    "\6\0\21\30\1\143\4\30\4\0\1\30\25\0\1\30"+
+    "\6\0\13\30\1\144\12\30\4\0\1\30\25\0\1\30"+
+    "\6\0\20\30\1\145\5\30\4\0\1\30\25\0\1\30"+
+    "\6\0\22\30\1\146\3\30\4\0\1\30\25\0\1\30"+
+    "\6\0\21\30\1\147\4\30\4\0\1\30\25\0\1\30"+
+    "\6\0\22\30\1\150\3\30\4\0\1\30\25\0\1\30"+
+    "\6\0\25\30\1\151\4\0\1\30\25\0\1\30\6\0"+
+    "\10\30\1\152\15\30\4\0\1\30\25\0\1\30\6\0"+
+    "\14\30\1\153\11\30\4\0\1\30\25\0\1\30\6\0"+
+    "\1\154\17\30\1\155\5\30\4\0\1\30\25\0\1\30"+
+    "\6\0\23\30\1\156\2\30\4\0\1\30\25\0\1\30"+
+    "\6\0\20\30\1\157\5\30\4\0\1\30\25\0\1\30"+
+    "\6\0\10\30\1\160\15\30\4\0\1\30\25\0\1\30"+
+    "\6\0\10\30\1\161\15\30\4\0\1\30\3\0\14\67"+
+    "\1\133\4\67\1\162\45\67\22\0\1\30\6\0\4\30"+
+    "\1\163\21\30\4\0\1\30\25\0\1\30\6\0\13\30"+
+    "\1\164\12\30\4\0\1\30\25\0\1\30\6\0\1\165"+
+    "\25\30\4\0\1\30\25\0\1\30\6\0\20\30\1\166"+
+    "\5\30\4\0\1\30\25\0\1\30\6\0\21\30\1\167"+
+    "\1\170\3\30\4\0\1\30\25\0\1\30\6\0\1\30"+
+    "\1\171\24\30\4\0\1\30\25\0\1\30\6\0\4\30"+
+    "\1\172\21\30\4\0\1\30\25\0\1\30\6\0\21\30"+
+    "\1\173\4\30\4\0\1\30\25\0\1\30\6\0\22\30"+
+    "\1\174\3\30\4\0\1\30\25\0\1\30\6\0\2\30"+
+    "\1\175\23\30\4\0\1\30\25\0\1\30\6\0\15\30"+
+    "\1\176\10\30\4\0\1\30\25\0\1\30\6\0\16\30"+
+    "\1\177\7\30\4\0\1\30\25\0\1\30\6\0\20\30"+
+    "\1\200\5\30\4\0\1\30\25\0\1\30\6\0\10\30"+
+    "\1\201\15\30\4\0\1\30\25\0\1\30\6\0\4\30"+
+    "\1\202\21\30\4\0\1\30\25\0\1\30\6\0\3\30"+
+    "\1\203\22\30\4\0\1\30\25\0\1\30\6\0\13\30"+
+    "\1\204\12\30\4\0\1\30\25\0\1\30\6\0\15\30"+
+    "\1\205\10\30\4\0\1\30\25\0\1\30\6\0\12\30"+
+    "\1\206\13\30\4\0\1\30\25\0\1\30\6\0\22\30"+
+    "\1\207\3\30\4\0\1\30\25\0\1\30\6\0\10\30"+
+    "\1\210\15\30\4\0\1\30\25\0\1\30\6\0\13\30"+
+    "\1\211\12\30\4\0\1\30\25\0\1\30\6\0\4\30"+
+    "\1\212\21\30\4\0\1\30\25\0\1\30\6\0\7\30"+
+    "\1\213\16\30\4\0\1\30\25\0\1\30\6\0\22\30"+
+    "\1\214\3\30\4\0\1\30\25\0\1\30\6\0\24\30"+
+    "\1\215\1\30\4\0\1\30\25\0\1\30\6\0\22\30"+
+    "\1\216\3\30\4\0\1\30\25\0\1\30\6\0\15\30"+
+    "\1\217\10\30\4\0\1\30\25\0\1\30\6\0\4\30"+
+    "\1\220\21\30\4\0\1\30\25\0\1\30\6\0\3\30"+
+    "\1\221\22\30\4\0\1\30\25\0\1\30\6\0\15\30"+
+    "\1\222\10\30\4\0\1\30\25\0\1\30\6\0\4\30"+
+    "\1\223\21\30\4\0\1\30\25\0\1\30\6\0\13\30"+
+    "\1\224\12\30\4\0\1\30\25\0\1\30\6\0\4\30"+
+    "\1\225\21\30\4\0\1\30\25\0\1\30\6\0\26\30"+
+    "\4\0\1\226\25\0\1\30\6\0\6\30\1\227\17\30"+
+    "\4\0\1\30\25\0\1\30\6\0\23\30\1\230\2\30"+
+    "\4\0\1\30\25\0\1\30\6\0\15\30\1\231\10\30"+
+    "\4\0\1\30\25\0\1\30\6\0\25\30\1\232\4\0"+
+    "\1\30\25\0\1\30\6\0\4\30\1\233\21\30\4\0"+
+    "\1\30\25\0\1\30\6\0\10\30\1\234\15\30\4\0"+
+    "\1\30\25\0\1\30\6\0\22\30\1\235\3\30\4\0"+
+    "\1\30\25\0\1\30\6\0\7\30\1\236\16\30\4\0"+
+    "\1\30\3\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[4675];
+    int [] result = new int[5500];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -269,13 +288,13 @@ public class Lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\1\11\2\1\2\11\2\1\2\11\1\1\3\11"+
-    "\2\1\2\11\20\1\5\11\1\1\3\11\1\1\2\11"+
-    "\1\0\1\11\1\0\1\1\1\0\3\11\21\1\11\11"+
-    "\1\0\70\1";
+    "\2\0\1\11\2\1\2\11\2\1\2\11\1\1\4\11"+
+    "\2\1\2\11\24\1\5\11\1\1\3\11\1\1\2\11"+
+    "\1\0\1\11\1\0\1\1\1\0\3\11\25\1\11\11"+
+    "\1\0\103\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[138];
+    int [] result = new int[158];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -801,449 +820,484 @@ public class Lexer implements java_cup.runtime.Scanner {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [180] { listaErrores.add(new Errores(\"LEXICO\",\"El caracter \"+"+ZZ_NL+"                yytext()+\" no pertenece al lenguaje\", yyline, yycolumn)); }");
+            System.out.println("action [190] { listaErrores.add(new Errores(\"LEXICO\",\"El caracter \"+"+ZZ_NL+"                yytext()+\" no pertenece al lenguaje\", yyline, yycolumn)); }");
             { listaErrores.add(new Errores("LEXICO","El caracter "+
                 yytext()+" no pertenece al lenguaje", yyline, yycolumn));
             }
           // fall through
-          case 64: break;
+          case 69: break;
           case 2:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [159] {  }");
+            System.out.println("action [169] {  }");
             { 
             }
           // fall through
-          case 65: break;
+          case 70: break;
           case 3:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [112] { return new Symbol(sym.NOT, yycolumn, yyline, yytext()); }");
+            System.out.println("action [118] { return new Symbol(sym.NOT, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.NOT, yycolumn, yyline, yytext());
             }
           // fall through
-          case 66: break;
+          case 71: break;
           case 4:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [161] { cadena = \"\"; yybegin(CADENA); }");
+            System.out.println("action [171] { cadena = \"\"; yybegin(CADENA); }");
             { cadena = ""; yybegin(CADENA);
             }
           // fall through
-          case 67: break;
+          case 72: break;
           case 5:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [108] { return new Symbol(sym.MOD, yycolumn, yyline, yytext()); }");
+            System.out.println("action [114] { return new Symbol(sym.MOD, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.MOD, yycolumn, yyline, yytext());
             }
           // fall through
-          case 68: break;
+          case 73: break;
           case 6:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [120] { return new Symbol(sym.PARENTESIS_A, yycolumn, yyline, yytext()); }");
+            System.out.println("action [126] { return new Symbol(sym.PARENTESIS_A, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.PARENTESIS_A, yycolumn, yyline, yytext());
             }
           // fall through
-          case 69: break;
+          case 74: break;
           case 7:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [121] { return new Symbol(sym.PARENTESIS_C, yycolumn, yyline, yytext()); }");
+            System.out.println("action [127] { return new Symbol(sym.PARENTESIS_C, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.PARENTESIS_C, yycolumn, yyline, yytext());
             }
           // fall through
-          case 70: break;
+          case 75: break;
           case 8:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [106] { return new Symbol(sym.POR, yycolumn, yyline, yytext()); }");
+            System.out.println("action [112] { return new Symbol(sym.POR, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.POR, yycolumn, yyline, yytext());
             }
           // fall through
-          case 71: break;
+          case 76: break;
           case 9:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [103] { return new Symbol(sym.SUMA, yycolumn, yyline, yytext()); }");
+            System.out.println("action [109] { return new Symbol(sym.SUMA, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.SUMA, yycolumn, yyline, yytext());
             }
           // fall through
-          case 72: break;
+          case 77: break;
           case 10:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [102] { return new Symbol(sym.COMA, yycolumn, yyline, yytext()); }");
+            System.out.println("action [108] { return new Symbol(sym.COMA, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.COMA, yycolumn, yyline, yytext());
             }
           // fall through
-          case 73: break;
+          case 78: break;
           case 11:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [104] { return new Symbol(sym.MENOS, yycolumn, yyline, yytext()); }");
+            System.out.println("action [110] { return new Symbol(sym.MENOS, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.MENOS, yycolumn, yyline, yytext());
             }
           // fall through
-          case 74: break;
+          case 79: break;
           case 12:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [107] { return new Symbol(sym.DIVISION, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.DIVISION, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 75: break;
-          case 13:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [155] { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 76: break;
-          case 14:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [100] { return new Symbol(sym.DOSPUNTOS, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.DOSPUNTOS, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 77: break;
-          case 15:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [101] { return new Symbol(sym.PUNTOYCOMA, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.PUNTOYCOMA, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 78: break;
-          case 16:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [114] { return new Symbol(sym.MENOR, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.MENOR, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 79: break;
-          case 17:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [110] { return new Symbol(sym.IGUAL, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.IGUAL, yycolumn, yyline, yytext());
+            System.out.println("action [107] { return new Symbol(sym.PUNTO, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.PUNTO, yycolumn, yyline, yytext());
             }
           // fall through
           case 80: break;
-          case 18:
+          case 13:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [116] { return new Symbol(sym.MAYOR, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.MAYOR, yycolumn, yyline, yytext());
+            System.out.println("action [113] { return new Symbol(sym.DIVISION, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.DIVISION, yycolumn, yyline, yytext());
             }
           // fall through
           case 81: break;
-          case 19:
+          case 14:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [156] { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.ID, yycolumn, yyline, yytext());
+            System.out.println("action [165] { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext());
             }
           // fall through
           case 82: break;
-          case 20:
+          case 15:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [124] { return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext());
+            System.out.println("action [105] { return new Symbol(sym.DOSPUNTOS, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.DOSPUNTOS, yycolumn, yyline, yytext());
             }
           // fall through
           case 83: break;
-          case 21:
+          case 16:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [125] { return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext());
+            System.out.println("action [106] { return new Symbol(sym.PUNTOYCOMA, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.PUNTOYCOMA, yycolumn, yyline, yytext());
             }
           // fall through
           case 84: break;
-          case 22:
+          case 17:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [119] { return new Symbol(sym.XOR, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.XOR, yycolumn, yyline, yytext());
+            System.out.println("action [120] { return new Symbol(sym.MENOR, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.MENOR, yycolumn, yyline, yytext());
             }
           // fall through
           case 85: break;
-          case 23:
+          case 18:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [126] { return new Symbol(sym.GUIONBAJO, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.GUIONBAJO, yycolumn, yyline, yytext());
+            System.out.println("action [116] { return new Symbol(sym.IGUAL, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.IGUAL, yycolumn, yyline, yytext());
             }
           // fall through
           case 86: break;
-          case 24:
+          case 19:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [122] { return new Symbol(sym.LLAVE_A, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.LLAVE_A, yycolumn, yyline, yytext());
+            System.out.println("action [122] { return new Symbol(sym.MAYOR, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.MAYOR, yycolumn, yyline, yytext());
             }
           // fall through
           case 87: break;
-          case 25:
+          case 20:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [123] { return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext());
+            System.out.println("action [166] { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.ID, yycolumn, yyline, yytext());
             }
           // fall through
           case 88: break;
-          case 26:
+          case 21:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [169] { cadena += yytext(); }");
-            { cadena += yytext();
+            System.out.println("action [130] { return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext());
             }
           // fall through
           case 89: break;
+          case 22:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [131] { return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 90: break;
+          case 23:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [125] { return new Symbol(sym.XOR, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.XOR, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 91: break;
+          case 24:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [132] { return new Symbol(sym.GUIONBAJO, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.GUIONBAJO, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 92: break;
+          case 25:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [128] { return new Symbol(sym.LLAVE_A, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.LLAVE_A, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 93: break;
+          case 26:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [129] { return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 94: break;
           case 27:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [164] { String tmp= cadena;"+ZZ_NL+"            cadena=\"\";"+ZZ_NL+"            yybegin(YYINITIAL);"+ZZ_NL+"            return new Symbol(sym.CADENA, yyline, yycolumn,tmp); }");
+            System.out.println("action [179] { cadena += yytext(); }");
+            { cadena += yytext();
+            }
+          // fall through
+          case 95: break;
+          case 28:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [174] { String tmp= cadena;"+ZZ_NL+"            cadena=\"\";"+ZZ_NL+"            yybegin(YYINITIAL);"+ZZ_NL+"            return new Symbol(sym.CADENA, yyline, yycolumn,tmp); }");
             { String tmp= cadena;
             cadena="";
             yybegin(YYINITIAL);
             return new Symbol(sym.CADENA, yyline, yycolumn,tmp);
             }
           // fall through
-          case 90: break;
-          case 28:
+          case 96: break;
+          case 29:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [111] { return new Symbol(sym.DIFERENCIA, yycolumn, yyline, yytext()); }");
+            System.out.println("action [117] { return new Symbol(sym.DIFERENCIA, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.DIFERENCIA, yycolumn, yyline, yytext());
             }
           // fall through
-          case 91: break;
-          case 29:
+          case 97: break;
+          case 30:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [118] { return new Symbol(sym.AND, yycolumn, yyline, yytext()); }");
+            System.out.println("action [124] { return new Symbol(sym.AND, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.AND, yycolumn, yyline, yytext());
             }
           // fall through
-          case 92: break;
-          case 30:
+          case 98: break;
+          case 31:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [105] { return new Symbol(sym.POTENCIA, yycolumn, yyline, yytext()); }");
+            System.out.println("action [111] { return new Symbol(sym.POTENCIA, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.POTENCIA, yycolumn, yyline, yytext());
             }
           // fall through
-          case 93: break;
-          case 31:
+          case 99: break;
+          case 32:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [113] { return new Symbol(sym.MENORIGUAL, yycolumn, yyline, yytext()); }");
+            System.out.println("action [119] { return new Symbol(sym.MENORIGUAL, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.MENORIGUAL, yycolumn, yyline, yytext());
             }
           // fall through
-          case 94: break;
-          case 32:
+          case 100: break;
+          case 33:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [109] { return new Symbol(sym.DOSIGUAL, yycolumn, yyline, yytext()); }");
+            System.out.println("action [115] { return new Symbol(sym.DOSIGUAL, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.DOSIGUAL, yycolumn, yyline, yytext());
             }
           // fall through
-          case 95: break;
-          case 33:
+          case 101: break;
+          case 34:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [115] { return new Symbol(sym.MAYORIGUAL, yycolumn, yyline, yytext()); }");
+            System.out.println("action [121] { return new Symbol(sym.MAYORIGUAL, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.MAYORIGUAL, yycolumn, yyline, yytext());
             }
           // fall through
-          case 96: break;
-          case 34:
+          case 102: break;
+          case 35:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [139] { return new Symbol(sym.DO, yycolumn, yyline, yytext()); }");
+            System.out.println("action [145] { return new Symbol(sym.DO, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.DO, yycolumn, yyline, yytext());
             }
           // fall through
-          case 97: break;
-          case 35:
+          case 103: break;
+          case 36:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [137] { return new Symbol(sym.IF, yycolumn, yyline, yytext()); }");
+            System.out.println("action [143] { return new Symbol(sym.IF, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.IF, yycolumn, yyline, yytext());
             }
           // fall through
-          case 98: break;
-          case 36:
+          case 104: break;
+          case 37:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [117] { return new Symbol(sym.OR, yycolumn, yyline, yytext()); }");
+            System.out.println("action [123] { return new Symbol(sym.OR, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.OR, yycolumn, yyline, yytext());
             }
           // fall through
-          case 99: break;
-          case 37:
+          case 105: break;
+          case 38:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [171] { cadena += \"\\\"\"; }");
+            System.out.println("action [181] { cadena += \"\\\"\"; }");
             { cadena += "\"";
             }
           // fall through
-          case 100: break;
-          case 38:
+          case 106: break;
+          case 39:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [176] { cadena += \"\'\"; }");
+            System.out.println("action [186] { cadena += \"\'\"; }");
             { cadena += "'";
             }
           // fall through
-          case 101: break;
-          case 39:
+          case 107: break;
+          case 40:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [175] { cadena += \"\\f\"; }");
+            System.out.println("action [185] { cadena += \"\\f\"; }");
             { cadena += "\f";
             }
           // fall through
-          case 102: break;
-          case 40:
+          case 108: break;
+          case 41:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [172] { cadena += \"\\n\"; }");
+            System.out.println("action [182] { cadena += \"\\n\"; }");
             { cadena += "\n";
             }
           // fall through
-          case 103: break;
-          case 41:
+          case 109: break;
+          case 42:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [174] { cadena += \"\\r\"; }");
+            System.out.println("action [184] { cadena += \"\\r\"; }");
             { cadena += "\r";
             }
           // fall through
-          case 104: break;
-          case 42:
+          case 110: break;
+          case 43:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [173] { cadena += \"\\t\"; }");
+            System.out.println("action [183] { cadena += \"\\t\"; }");
             { cadena += "\t";
             }
           // fall through
-          case 105: break;
-          case 43:
+          case 111: break;
+          case 44:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [170] { cadena += \"\\\\\"; }");
+            System.out.println("action [180] { cadena += \"\\\\\"; }");
             { cadena += "\\";
             }
           // fall through
-          case 106: break;
-          case 44:
+          case 112: break;
+          case 45:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [158] { char carAux = yytext().charAt(1); return new Symbol(sym.CARACTER, yycolumn, yyline, carAux); }");
+            System.out.println("action [168] { char carAux = yytext().charAt(1); return new Symbol(sym.CARACTER, yycolumn, yyline, carAux); }");
             { char carAux = yytext().charAt(1); return new Symbol(sym.CARACTER, yycolumn, yyline, carAux);
             }
           // fall through
-          case 107: break;
-          case 45:
+          case 113: break;
+          case 46:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [154] { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext()); }");
+            System.out.println("action [164] { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext());
             }
           // fall through
-          case 108: break;
-          case 46:
+          case 114: break;
+          case 47:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [138] { return new Symbol(sym.FOR, yycolumn, yyline, yytext()); }");
+            System.out.println("action [144] { return new Symbol(sym.FOR, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.FOR, yycolumn, yyline, yytext());
             }
           // fall through
-          case 109: break;
-          case 47:
+          case 115: break;
+          case 48:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [132] { return new Symbol(sym.INT, yycolumn, yyline, yytext()); }");
+            System.out.println("action [138] { return new Symbol(sym.INT, yycolumn, yyline, yytext()); }");
             { return new Symbol(sym.INT, yycolumn, yyline, yytext());
             }
           // fall through
-          case 110: break;
-          case 48:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [130] { return new Symbol(sym.VAR, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.VAR, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 111: break;
+          case 116: break;
           case 49:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [133] { return new Symbol(sym.BOOLEANO, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.BOOLEANO, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 112: break;
-          case 50:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [134] { return new Symbol(sym.CHAR, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.CHAR, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 113: break;
-          case 51:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [142] { return new Symbol(sym.ELSE, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.ELSE, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 114: break;
-          case 52:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [144] { return new Symbol(sym.TRUE, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.TRUE, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 115: break;
-          case 53:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [148] { return new Symbol(sym.VOID, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.VOID, yycolumn, yyline, yytext());
-            }
-          // fall through
-          case 116: break;
-          case 54:
-            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [146] { return new Symbol(sym.BREAK, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.BREAK, yycolumn, yyline, yytext());
+            System.out.println("action [157] { return new Symbol(sym.NEW, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.NEW, yycolumn, yyline, yytext());
             }
           // fall through
           case 117: break;
-          case 55:
+          case 50:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [131] { return new Symbol(sym.CONST, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.CONST, yycolumn, yyline, yytext());
+            System.out.println("action [136] { return new Symbol(sym.VAR, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.VAR, yycolumn, yyline, yytext());
             }
           // fall through
           case 118: break;
-          case 56:
+          case 51:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [145] { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.FALSE, yycolumn, yyline, yytext());
+            System.out.println("action [139] { return new Symbol(sym.BOOLEANO, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.BOOLEANO, yycolumn, yyline, yytext());
             }
           // fall through
           case 119: break;
-          case 57:
+          case 52:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [141] { return new Symbol(sym.MATCH, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.MATCH, yycolumn, yyline, yytext());
+            System.out.println("action [140] { return new Symbol(sym.CHAR, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.CHAR, yycolumn, yyline, yytext());
             }
           // fall through
           case 120: break;
-          case 58:
+          case 53:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [140] { return new Symbol(sym.WHILE, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.WHILE, yycolumn, yyline, yytext());
+            System.out.println("action [148] { return new Symbol(sym.ELSE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.ELSE, yycolumn, yyline, yytext());
             }
           // fall through
           case 121: break;
-          case 59:
+          case 54:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [135] { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());
+            System.out.println("action [156] { return new Symbol(sym.LIST, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.LIST, yycolumn, yyline, yytext());
             }
           // fall through
           case 122: break;
-          case 60:
+          case 55:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [136] { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.STRING, yycolumn, yyline, yytext());
+            System.out.println("action [150] { return new Symbol(sym.TRUE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.TRUE, yycolumn, yyline, yytext());
             }
           // fall through
           case 123: break;
-          case 61:
+          case 56:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [143] { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext());
+            System.out.println("action [154] { return new Symbol(sym.VOID, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.VOID, yycolumn, yyline, yytext());
             }
           // fall through
           case 124: break;
-          case 62:
+          case 57:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [147] { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext());
+            System.out.println("action [152] { return new Symbol(sym.BREAK, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.BREAK, yycolumn, yyline, yytext());
             }
           // fall through
           case 125: break;
-          case 63:
+          case 58:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [149] { return new Symbol(sym.STARTWITH, yycolumn, yyline, yytext()); }");
-            { return new Symbol(sym.STARTWITH, yycolumn, yyline, yytext());
+            System.out.println("action [137] { return new Symbol(sym.CONST, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.CONST, yycolumn, yyline, yytext());
             }
           // fall through
           case 126: break;
+          case 59:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [151] { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.FALSE, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 127: break;
+          case 60:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [147] { return new Symbol(sym.MATCH, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.MATCH, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 128: break;
+          case 61:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [146] { return new Symbol(sym.WHILE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.WHILE, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 129: break;
+          case 62:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [158] { return new Symbol(sym.APPEND, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.APPEND, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 130: break;
+          case 63:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [141] { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 131: break;
+          case 64:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [159] { return new Symbol(sym.REMOVE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.REMOVE, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 132: break;
+          case 65:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [142] { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.STRING, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 133: break;
+          case 66:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [149] { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 134: break;
+          case 67:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [153] { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 135: break;
+          case 68:
+            System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [155] { return new Symbol(sym.STARTWITH, yycolumn, yyline, yytext()); }");
+            { return new Symbol(sym.STARTWITH, yycolumn, yyline, yytext());
+            }
+          // fall through
+          case 136: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

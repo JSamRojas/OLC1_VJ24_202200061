@@ -54,8 +54,8 @@ public class StartWith extends Instruccion {
             }
             
             var resultadoFuncion = metodo.interpretar(arbol, newTabla);
-                if(resultadoFuncion instanceof Errores){
-                    return resultadoFuncion;
+            if(resultadoFuncion instanceof Errores){
+                return resultadoFuncion;
             }  
         }
         return null;    

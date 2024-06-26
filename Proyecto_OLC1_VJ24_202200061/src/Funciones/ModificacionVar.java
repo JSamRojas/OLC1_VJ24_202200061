@@ -47,7 +47,7 @@ public class ModificacionVar extends Instruccion {
             }
 
             if(!variable.getMutabilidad()){
-                return new Errores("SEMANTICO", "La variable " + this.ID.toString() + " es de tipo const, por lo que no se puede modificar", this.linea, this.columna);
+                return new Errores("SEMANTICO", "La variable " + this.ID + " es de tipo const, por lo que no se puede modificar", this.linea, this.columna);
             }
 
             //SE VALIDA QUE EL TIPO DE LA EXPRESION SEA IGUAL AL TIPO DE LA VARIABLE
@@ -56,7 +56,8 @@ public class ModificacionVar extends Instruccion {
                 " y se intento asignar un valor de tipo " + this.expresion.tipo.getTipo().toString(), this.linea, this.columna);
             }
 
-            variable.setValor(nuevoValor);   
+            variable.setValor(nuevoValor);  
+            
         } else {
             var newValor = variable.getValor();
             if(variable.getTipo().getTipo() == DatoNativo.ENTERO){

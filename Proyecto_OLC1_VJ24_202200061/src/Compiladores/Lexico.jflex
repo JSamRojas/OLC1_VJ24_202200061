@@ -46,6 +46,7 @@ BLANCOS = [\ \t\r\n\f]+
 
 DOSPUNTOS = ":"
 PUNTOYCOMA = ";"
+PUNTO = "."
 COMA = ","
 SUMA = "+"
 MENOS = "-"
@@ -94,11 +95,16 @@ BREAK = "break"
 CONTINUE = "continue"
 VOID = "void"
 STARTWITH = "start_with"
+LIST = "list"
+NEW = "new"
+APPEND = "append"
+REMOVE = "remove"
 
 %%
 
 <YYINITIAL> {DOSPUNTOS}         { return new Symbol(sym.DOSPUNTOS, yycolumn, yyline, yytext()); }
 <YYINITIAL> {PUNTOYCOMA}        { return new Symbol(sym.PUNTOYCOMA, yycolumn, yyline, yytext()); }
+<YYINITIAL> {PUNTO}             { return new Symbol(sym.PUNTO, yycolumn, yyline, yytext()); }
 <YYINITIAL> {COMA}              { return new Symbol(sym.COMA, yycolumn, yyline, yytext()); }
 <YYINITIAL> {SUMA}              { return new Symbol(sym.SUMA, yycolumn, yyline, yytext()); }
 <YYINITIAL> {MENOS}             { return new Symbol(sym.MENOS, yycolumn, yyline, yytext()); }
@@ -127,26 +133,30 @@ STARTWITH = "start_with"
 
 // ------------>  Instrucciones <-------------------
 
-<YYINITIAL> {VAR}               { return new Symbol(sym.VAR, yycolumn, yyline, yytext()); }
-<YYINITIAL> {CONST}             { return new Symbol(sym.CONST, yycolumn, yyline, yytext()); }
-<YYINITIAL> {INT}               { return new Symbol(sym.INT, yycolumn, yyline, yytext()); }
-<YYINITIAL> {BOOLEANO}          { return new Symbol(sym.BOOLEANO, yycolumn, yyline, yytext()); }
-<YYINITIAL> {CHAR}              { return new Symbol(sym.CHAR, yycolumn, yyline, yytext()); }
-<YYINITIAL> {DOUBLE}            { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }
-<YYINITIAL> {STRING}            { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
-<YYINITIAL> {IF}                { return new Symbol(sym.IF, yycolumn, yyline, yytext()); }
-<YYINITIAL> {FOR}               { return new Symbol(sym.FOR, yycolumn, yyline, yytext()); }
-<YYINITIAL> {DO}                { return new Symbol(sym.DO, yycolumn, yyline, yytext()); } 
-<YYINITIAL> {WHILE}             { return new Symbol(sym.WHILE, yycolumn, yyline, yytext()); }  
-<YYINITIAL> {MATCH}             { return new Symbol(sym.MATCH, yycolumn, yyline, yytext()); }
-<YYINITIAL> {ELSE}              { return new Symbol(sym.ELSE, yycolumn, yyline, yytext()); }
-<YYINITIAL> {PRINTLN}           { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext()); }
-<YYINITIAL> {TRUE}              { return new Symbol(sym.TRUE, yycolumn, yyline, yytext()); }
-<YYINITIAL> {FALSE}             { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }
-<YYINITIAL> {BREAK}             { return new Symbol(sym.BREAK, yycolumn, yyline, yytext()); } 
-<YYINITIAL> {CONTINUE}          { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext()); }
-<YYINITIAL> {VOID}              { return new Symbol(sym.VOID, yycolumn, yyline, yytext()); }
-<YYINITIAL> {STARTWITH}         { return new Symbol(sym.STARTWITH, yycolumn, yyline, yytext()); }
+<YYINITIAL> {VAR}                   { return new Symbol(sym.VAR, yycolumn, yyline, yytext()); }
+<YYINITIAL> {CONST}                 { return new Symbol(sym.CONST, yycolumn, yyline, yytext()); }
+<YYINITIAL> {INT}                   { return new Symbol(sym.INT, yycolumn, yyline, yytext()); }
+<YYINITIAL> {BOOLEANO}              { return new Symbol(sym.BOOLEANO, yycolumn, yyline, yytext()); }
+<YYINITIAL> {CHAR}                  { return new Symbol(sym.CHAR, yycolumn, yyline, yytext()); }
+<YYINITIAL> {DOUBLE}                { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }
+<YYINITIAL> {STRING}                { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
+<YYINITIAL> {IF}                    { return new Symbol(sym.IF, yycolumn, yyline, yytext()); }
+<YYINITIAL> {FOR}                   { return new Symbol(sym.FOR, yycolumn, yyline, yytext()); }
+<YYINITIAL> {DO}                    { return new Symbol(sym.DO, yycolumn, yyline, yytext()); } 
+<YYINITIAL> {WHILE}                 { return new Symbol(sym.WHILE, yycolumn, yyline, yytext()); }  
+<YYINITIAL> {MATCH}                 { return new Symbol(sym.MATCH, yycolumn, yyline, yytext()); }
+<YYINITIAL> {ELSE}                  { return new Symbol(sym.ELSE, yycolumn, yyline, yytext()); }
+<YYINITIAL> {PRINTLN}               { return new Symbol(sym.PRINTLN, yycolumn, yyline, yytext()); }
+<YYINITIAL> {TRUE}                  { return new Symbol(sym.TRUE, yycolumn, yyline, yytext()); }
+<YYINITIAL> {FALSE}                 { return new Symbol(sym.FALSE, yycolumn, yyline, yytext()); }
+<YYINITIAL> {BREAK}                 { return new Symbol(sym.BREAK, yycolumn, yyline, yytext()); } 
+<YYINITIAL> {CONTINUE}              { return new Symbol(sym.CONTINUE, yycolumn, yyline, yytext()); }
+<YYINITIAL> {VOID}                  { return new Symbol(sym.VOID, yycolumn, yyline, yytext()); }
+<YYINITIAL> {STARTWITH}             { return new Symbol(sym.STARTWITH, yycolumn, yyline, yytext()); }
+<YYINITIAL> {LIST}                  { return new Symbol(sym.LIST, yycolumn, yyline, yytext()); }
+<YYINITIAL> {NEW}                   { return new Symbol(sym.NEW, yycolumn, yyline, yytext()); }
+<YYINITIAL> {APPEND}                { return new Symbol(sym.APPEND, yycolumn, yyline, yytext()); }
+<YYINITIAL> {REMOVE}                { return new Symbol(sym.REMOVE, yycolumn, yyline, yytext()); }
 
 // ------------>  Expresiones <-------------------
 

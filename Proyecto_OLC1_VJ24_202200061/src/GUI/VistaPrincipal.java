@@ -2,13 +2,16 @@
 package GUI;
 
 import Abstracto.Instruccion;
+import Funciones.AppendLista;
 import Funciones.DeclaracionArr;
+import Funciones.DeclaracionLista;
 import Simbolo.Arbol;
 import Simbolo.TablaSimbolos;
 import Funciones.Errores;
 import Funciones.Simbolos;
 import Funciones.DeclaracionVar;
 import Funciones.Metodos;
+import Funciones.ModificacionArr;
 import Funciones.ModificacionVar;
 import Funciones.StartWith;
 
@@ -356,7 +359,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                         continue;
                     }
                     
-                    if(a instanceof DeclaracionVar || a instanceof ModificacionVar || a instanceof DeclaracionArr){
+                    if(a instanceof DeclaracionVar || a instanceof ModificacionVar || a instanceof DeclaracionArr || a instanceof ModificacionArr || 
+                       a instanceof DeclaracionLista || a instanceof AppendLista){
                         var res = a.interpretar(ast, tabla);
                         if(res instanceof Errores errores){
                             lista.add(errores);
@@ -405,9 +409,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-    
-    
-    
+
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         
         JFileChooser fc = new JFileChooser("D:\\USAC\\VACACIONES JUNIO 2024\\LAB COMPI 1 VACIONES 2024\\OLC1_VJ24_202200061");
