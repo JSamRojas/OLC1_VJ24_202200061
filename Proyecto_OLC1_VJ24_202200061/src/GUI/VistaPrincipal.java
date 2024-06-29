@@ -5,11 +5,14 @@ import Abstracto.Instruccion;
 import Funciones.AppendLista;
 import Funciones.DeclaracionArr;
 import Funciones.DeclaracionLista;
+import Funciones.DeclaracionStructs;
+import Funciones.InstanciaStruct;
 import Simbolo.Arbol;
 import Simbolo.TablaSimbolos;
 import Funciones.Errores;
 import Funciones.Simbolos;
 import Funciones.DeclaracionVar;
+import Funciones.FuncFunciones;
 import Funciones.Metodos;
 import Funciones.ModificacionArr;
 import Funciones.ModificacionVar;
@@ -321,6 +324,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
         int index2 = jTabbedPane1.getSelectedIndex();
         
+        /**/
         if (index2 != 0) {
             
             String nombre = jTabbedPane1.getTitleAt(index2);
@@ -351,6 +355,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
                     if(a instanceof Metodos){
                         ast.addFuncMetod(a);
                     }
+                    
+                    if(a instanceof FuncFunciones){
+                        ast.addFuncMetod(a);
+                    }
+                    
+                    if(a instanceof DeclaracionStructs){
+                        a.interpretar(ast, tabla);
+                        ast.addStruct(a);
+                    }
                 }
                 
                 // SEGUNDA VUELTA AL ARBOL (DECLARACION DE VARIABLES, ARREGLOS Y LISTAS GLOBALES)
@@ -360,7 +373,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                     }
                     
                     if(a instanceof DeclaracionVar || a instanceof ModificacionVar || a instanceof DeclaracionArr || a instanceof ModificacionArr || 
-                       a instanceof DeclaracionLista || a instanceof AppendLista){
+                       a instanceof DeclaracionLista || a instanceof AppendLista || a instanceof InstanciaStruct){
                         var res = a.interpretar(ast, tabla);
                         if(res instanceof Errores errores){
                             lista.add(errores);

@@ -3,6 +3,7 @@ package Funciones;
 
 import Abstracto.Instruccion;
 import java.util.LinkedList;
+import Expresiones.Return;
 import Simbolo.*;
 
 /**
@@ -67,6 +68,11 @@ public class FuncFor extends Instruccion {
                     break;
                 }
                 
+                if(i instanceof Return ret){
+                    ret.setTablaEntorno(newTabla2);
+                    return i;
+                }
+                
                 var resIns = i.interpretar(arbol, newTabla2);
                 
                 if(resIns instanceof Errores){
@@ -79,6 +85,10 @@ public class FuncFor extends Instruccion {
                 
                 if(resIns instanceof Continue){
                     break;
+                }
+                
+                if(resIns instanceof Return){
+                    return resIns;
                 }
                 
             }

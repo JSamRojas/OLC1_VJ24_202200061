@@ -2,6 +2,7 @@
 package Funciones;
 
 import Abstracto.Instruccion;
+import Expresiones.Return;
 import java.util.LinkedList;
 import Simbolo.*;
 
@@ -49,19 +50,53 @@ public class FuncElseIf extends Instruccion {
                     return i;
                 }
                 
+                if (i instanceof Continue) {
+                    return i;
+                }
+                
+                if(i instanceof Return ret){
+                    ret.setTablaEntorno(newTabla);
+                    return i;
+                }
+                
                 var resultado = i.interpretar(arbol, newTabla);
                 
                 if(resultado instanceof Errores){
-                    arbol.errores.add((Errores) resultado);
+                    return resultado;
                 }
                 
                 if (resultado instanceof Break) {
                     return resultado;
                 }
                 
+                if (resultado instanceof Continue) {
+                    return resultado;
+                }
+                
+                if(resultado instanceof Return){
+                    return resultado;
+                }
+                
             }
         } else {
-            this.NextIf.interpretar(arbol, tabla);     
+            var resultado = this.NextIf.interpretar(arbol, tabla);
+            
+            if(resultado instanceof Errores){
+                return resultado;
+            }
+                
+            if (resultado instanceof Break) {
+                return resultado;
+            }
+
+            if (resultado instanceof Continue) {
+                return resultado;
+            }
+
+            if(resultado instanceof Return){
+                return resultado;
+            }
+    
         }
         return null;
     }

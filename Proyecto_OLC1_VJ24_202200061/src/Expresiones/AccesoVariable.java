@@ -11,7 +11,7 @@ import Simbolo.*;
  */
 public class AccesoVariable extends Instruccion{
     
-    private String ID;
+    public String ID;
 
     public AccesoVariable(String ID, int linea, int columna) {
         super(new Tipo(DatoNativo.VOID), linea, columna);

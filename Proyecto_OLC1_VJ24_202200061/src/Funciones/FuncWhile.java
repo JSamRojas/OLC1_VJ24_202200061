@@ -2,6 +2,7 @@
 package Funciones;
 
 import Abstracto.Instruccion;
+import Expresiones.Return;
 import java.util.LinkedList;
 import Simbolo.*;
 
@@ -57,6 +58,11 @@ public class FuncWhile extends Instruccion {
                     break;
                 }
                 
+                if(i instanceof Return ret){
+                    ret.setTablaEntorno(newTabla2);
+                    return i;
+                }
+                
                 var resultado = i.interpretar(arbol, newTabla2);
  
                 if(resultado instanceof Errores){
@@ -69,6 +75,10 @@ public class FuncWhile extends Instruccion {
                 
                 if (resultado instanceof Break) {
                     return null;
+                }
+                
+                if(resultado instanceof Return){
+                    return resultado;
                 }
                 
             }

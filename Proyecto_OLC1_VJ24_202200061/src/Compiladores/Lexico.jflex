@@ -99,6 +99,12 @@ LIST = "list"
 NEW = "new"
 APPEND = "append"
 REMOVE = "remove"
+ROUND = "round"
+LENGTH = "length"
+FIND = "find"
+STRUCT = "struct"
+TOSTRING = "tostring"
+RETURN = "return"
 
 %%
 
@@ -157,6 +163,12 @@ REMOVE = "remove"
 <YYINITIAL> {NEW}                   { return new Symbol(sym.NEW, yycolumn, yyline, yytext()); }
 <YYINITIAL> {APPEND}                { return new Symbol(sym.APPEND, yycolumn, yyline, yytext()); }
 <YYINITIAL> {REMOVE}                { return new Symbol(sym.REMOVE, yycolumn, yyline, yytext()); }
+<YYINITIAL> {ROUND}                 { return new Symbol(sym.ROUND, yycolumn, yyline, yytext()); }
+<YYINITIAL> {LENGTH}                { return new Symbol(sym.LENGTH, yycolumn, yyline, yytext()); }
+<YYINITIAL> {FIND}                  { return new Symbol(sym.FIND, yycolumn, yyline, yytext()); }
+<YYINITIAL> {STRUCT}                { return new Symbol(sym.STRUCT, yycolumn, yyline, yytext()); }
+<YYINITIAL> {TOSTRING}              { return new Symbol(sym.TOSTRING, yycolumn, yyline, yytext()); }
+<YYINITIAL> {RETURN}                { return new Symbol(sym.RETURN, yycolumn, yyline, yytext()); }
 
 // ------------>  Expresiones <-------------------
 

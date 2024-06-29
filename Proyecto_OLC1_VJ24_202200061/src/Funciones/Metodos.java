@@ -2,8 +2,8 @@
 package Funciones;
 
 import Abstracto.Instruccion;
+import Expresiones.Return;
 import java.util.LinkedList;
-import Expresiones.*;
 import Simbolo.*;
 import java.util.HashMap;
 
@@ -31,6 +31,10 @@ public class Metodos extends Instruccion {
             var resultado = i.interpretar(arbol, tabla);
             
             if(resultado instanceof Errores){
+                return resultado;
+            }
+            
+            if(resultado instanceof Return){
                 return resultado;
             }
         }

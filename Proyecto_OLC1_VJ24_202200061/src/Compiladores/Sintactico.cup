@@ -57,10 +57,10 @@ terminal String DOSPUNTOS, PUNTOYCOMA, COMA, PUNTO;
 terminal String IGUAL, DOSIGUAL;
 terminal String SUMA, MENOS, POR, DIVISION, POTENCIA, MOD;
 terminal String DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
-terminal String OR, AND, XOR, NOT, DO, WHILE;
+terminal String OR, AND, XOR, NOT, DO, WHILE, STRUCT, TOSTRING;
 terminal String PARENTESIS_A, PARENTESIS_C, LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C, GUIONBAJO;
 terminal String VAR, CONST, INT, BOOLEANO, CHAR, STRING, IF, PRINTLN, DOUBLE, ELSE, MATCH, FOR;
-terminal String BREAK, CONTINUE, VOID, STARTWITH, NEW, LIST, APPEND, REMOVE;
+terminal String BREAK, CONTINUE, VOID, STARTWITH, NEW, LIST, APPEND, REMOVE, ROUND, LENGTH, FIND, RETURN;
 terminal UMENOS;
 
 
@@ -70,14 +70,16 @@ non terminal LinkedList<Instruccion> inicio, instrucciones, listaexpresiones, li
 non terminal Instruccion instruccion;
 non terminal Instruccion declaracion, imprimir, modificacion, sif, smatch, scontinue;
 non terminal Instruccion expresion, sfor, swhile, act_for, sbreak, sdowhile, sappend, sremove;
-non terminal Instruccion metodo, sstartwith;
+non terminal Instruccion metodo, sstartwith, sllamada, dstruct, insstruct, sreturn;
 non terminal DatoNativo tiposCasteo;
-non terminal LinkedList<HashMap> params;
+non terminal LinkedList<HashMap> params, listastruct;
 non terminal Tipo tipos;
 non terminal TipoMutabilidad mutabilidad;
 non terminal LinkedList<CasosMatch> casos;
 non terminal CasosMatch caso;
 non terminal LinkedList<LinkedList<Instruccion>> listaexp2D;
+non terminal HashMap<String,Instruccion> listavalstruct, valatribstruct;
+non terminal HashMap<String,Object> atribstruct;
 
 //------> Declaración de precedencias
 
@@ -89,6 +91,7 @@ precedence left DOSIGUAL, DIFERENCIA, MENOR, MENORIGUAL, MAYOR, MAYORIGUAL;
 precedence left SUMA, MENOS;
 precedence left POR, DIVISION, MOD;
 precedence nonassoc POTENCIA;
+precedence left PUNTO;
 precedence right UMENOS;
 
 //------> Definir Simbolo Inicial
@@ -113,10 +116,14 @@ instruccion ::= imprimir:a          {: RESULT = a; :}
              |  sbreak:a            {: RESULT = a; :}
              |  sdowhile:a          {: RESULT = a; :}
              |  scontinue:a         {: RESULT = a; :}
+             |  sreturn:a           {: RESULT = a; :}
              |  metodo:a            {: RESULT = a; :}
              |  sstartwith:a        {: RESULT = a; :}
              |  sappend:a           {: RESULT = a; :}
              |  sremove:a           {: RESULT = a; :}
+             |  sllamada:a          {: RESULT = a; :}
+             |  dstruct:a           {: RESULT = a; :}
+             |  insstruct:a         {: RESULT = a; :}
              |  error PUNTOYCOMA
 ;
 
@@ -135,20 +142,58 @@ declaracion ::= mutabilidad:a ID:b DOSPUNTOS tipos:c IGUAL expresion:d PUNTOYCOM
 modificacion ::= ID:a IGUAL expresion:b PUNTOYCOMA                                                                        {: RESULT = new ModificacionVar(a, b, aleft, aright); :}
                | ID:a CORCHETE_A expresion:b CORCHETE_C IGUAL expresion:c PUNTOYCOMA                                      {: RESULT = new ModificacionArr(a, c, b, null, aleft, aright); :}
                | ID:a CORCHETE_A expresion:b CORCHETE_C CORCHETE_A expresion:c CORCHETE_C IGUAL expresion:d PUNTOYCOMA    {: RESULT = new ModificacionArr(a, d, b, c, aleft, aright); :}
+               | ID:a PUNTO ID:b IGUAL expresion:c PUNTOYCOMA                                                             {: RESULT = new ModificacionStruct(a, b, c, aleft, aright); :}
+               | ID:a PUNTO ID:b PUNTO ID:c IGUAL expresion:d PUNTOYCOMA                                                  {: RESULT = new ModificacionStruct(a, b, c, d, aleft, aright); :}   
                | ID:a SUMA SUMA PUNTOYCOMA                                                                                {: RESULT = new ModificacionVar(a, ModificadoresVar.AUMENTO, aleft, aright); :}
                | ID:a MENOS MENOS PUNTOYCOMA                                                                              {: RESULT = new ModificacionVar(a, ModificadoresVar.DECREMENTO, aleft, aright); :}
 ;
 
-metodo ::= tipos:a ID:b PARENTESIS_A params:c PARENTESIS_C LLAVE_A instrucciones:d LLAVE_C       {: RESULT = new Metodos(b, c, d, a, aleft, aright); :}
-         | tipos:a ID:b PARENTESIS_A PARENTESIS_C LLAVE_A instrucciones:c LLAVE_C                {: RESULT = new Metodos(b, new LinkedList<HashMap>(), c, a, aleft, aright); :}
+metodo ::= VOID ID:a PARENTESIS_A params:b PARENTESIS_C LLAVE_A instrucciones:c LLAVE_C          {: RESULT = new Metodos(a, b, c, new Tipo(DatoNativo.VOID), aleft, aright); :}
+         | VOID ID:a PARENTESIS_A PARENTESIS_C LLAVE_A instrucciones:b LLAVE_C                   {: RESULT = new Metodos(a, new LinkedList<HashMap>(), b, new Tipo(DatoNativo.VOID), aleft, aright); :}
+         | tipos:a ID:b PARENTESIS_A params:c PARENTESIS_C LLAVE_A instrucciones:d LLAVE_C       {: RESULT = new FuncFunciones(b, d, c, a, aleft, aright); :}
+         | tipos:a ID:b PARENTESIS_A PARENTESIS_C LLAVE_A instrucciones:c LLAVE_C                {: RESULT = new FuncFunciones(b, c, new LinkedList<HashMap>(), new Tipo(DatoNativo.VOID), aleft, aright); :}
+;
+
+dstruct ::= STRUCT LLAVE_A listastruct:a LLAVE_C ID:b PUNTOYCOMA                                 {: RESULT = new DeclaracionStructs(b, a, aleft, aright); :}
+;
+
+insstruct ::= mutabilidad:a ID:b DOSPUNTOS ID:c IGUAL LLAVE_A listavalstruct:d LLAVE_C PUNTOYCOMA      {: RESULT = new InstanciaStruct(c, b, d, a, aleft, aright); :}
+            | LLAVE_A listavalstruct:a LLAVE_C                                                         {: RESULT = new InstanciaStruct(a, aleft, aright); :}
 ;
 
 sstartwith ::= STARTWITH ID:a PARENTESIS_A listaparams:b PARENTESIS_C PUNTOYCOMA        {: RESULT = new StartWith(a, b, aleft, aright); :}
              | STARTWITH ID:a PARENTESIS_A PARENTESIS_C PUNTOYCOMA                      {: RESULT = new StartWith(a, new LinkedList<Instruccion>(), aleft, aright); :}
 ;
 
+sllamada ::= ID:a PARENTESIS_A listaparams:b PARENTESIS_C PUNTOYCOMA                    {: RESULT = new FuncLlamada(a, b, aleft, aright); :}
+           | ID:a PARENTESIS_A PARENTESIS_C PUNTOYCOMA                                  {: RESULT = new FuncLlamada(a, new LinkedList<Instruccion>(), aleft, aright); :}
+;
+
 listaparams ::= listaparams:a COMA expresion:b          {: RESULT = a; RESULT.add(b); :}
               | expresion:a                             {: RESULT = new LinkedList<Instruccion>(); RESULT.add(a); :}
+;
+
+listastruct ::= listastruct:a atribstruct:b PUNTOYCOMA                                          {: RESULT = a; RESULT.add(b); :}
+              | atribstruct:a PUNTOYCOMA                                                        {: RESULT = new LinkedList<HashMap>(); RESULT.add(a); :}
+;
+
+atribstruct ::= ID:a DOSPUNTOS tipos:b          {: RESULT = new HashMap<String,Object>(); 
+                                                   RESULT.put("id", a); 
+                                                   RESULT.put("tipo", b); 
+                                                   RESULT.put("valor", null); :}
+
+              | ID:a DOSPUNTOS ID:b             {: RESULT = new HashMap<String,Object>();
+                                                   RESULT.put("id", a); 
+                                                   RESULT.put("tipo", b); 
+                                                   RESULT.put("valor", null); :}
+;
+
+listavalstruct ::= listavalstruct:a COMA valatribstruct:b                     {: RESULT = a; RESULT.putAll(b); :} 
+                 | valatribstruct:a                                           {: RESULT = new HashMap<String,Instruccion>(); RESULT.putAll(a); :}
+;
+
+valatribstruct ::= ID:a DOSPUNTOS expresion:b                             {: RESULT = new HashMap<String,Instruccion>(); RESULT.put(a.toString(), b); :}
+                 | ID:a DOSPUNTOS insstruct:b                             {: RESULT = new HashMap<String,Instruccion>(); RESULT.put(a.toString(), b); :}
 ;
 
 params ::= params:a COMA tipos:b ID:c           {: RESULT = a; var hm = new HashMap<String, Object>(); hm.put("id", c); hm.put("tipo", b); RESULT.add(hm); :}
@@ -206,8 +251,15 @@ sbreak ::= BREAK:a PUNTOYCOMA   {: RESULT = new Break(aleft, aright); :}
 scontinue ::= CONTINUE:a PUNTOYCOMA   {: RESULT = new Continue(aleft, aright); :}
 ;
 
+sreturn ::= RETURN expresion:a PUNTOYCOMA       {: RESULT = new Return(a, aleft, aright); :}
+          | RETURN:a PUNTOYCOMA                 {: RESULT = new Return(null, aleft, aright); :}
+;
+
 expresion ::= MENOS expresion:a                                                         {: RESULT = new Aritmeticas(a, OperadoresAritmeticos.NEGACION, aleft, aright); :} %prec UMENOS
             | NOT expresion:a                                                           {: RESULT = new Logicas(a, OperadoresLogicos.NOT, aleft, aright); :}
+            | PARENTESIS_A expresion:a PARENTESIS_C                                     {: RESULT = a; :}
+            | ID:a PARENTESIS_A listaparams:b PARENTESIS_C                              {: RESULT = new FuncLlamada(a, b, aleft, aright); :}
+            | ID:a PARENTESIS_A PARENTESIS_C                                            {: RESULT = new FuncLlamada(a, new LinkedList<Instruccion>(), aleft, aright); :}
             | expresion:a MENOS expresion:b                                             {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.RESTA, aleft, aright); :}
             | expresion:a SUMA expresion:b                                              {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.SUMA, aleft, aright); :}
             | expresion:a POR expresion:b                                               {: RESULT = new Aritmeticas(a, b, OperadoresAritmeticos.MULTIPLICACION, aleft, aright); :}
@@ -224,6 +276,15 @@ expresion ::= MENOS expresion:a                                                 
             | expresion:a AND expresion:b                                               {: RESULT = new Logicas(a, b, OperadoresLogicos.AND, aleft, aright); :}
             | expresion:a XOR expresion:b                                               {: RESULT = new Logicas(a, b, OperadoresLogicos.XOR, aleft, aright); :}
             | PARENTESIS_A tiposCasteo:a PARENTESIS_C expresion:b                       {: RESULT = new Casteo(b, a, aleft, aright); :}
+            | ID:a PUNTO ID:b                                                           {: RESULT = new AccesoStruct(a, b, aleft, aright); :}
+            | ID:a PUNTO ID:b PUNTO ID:c                                                {: RESULT = new AccesoStruct(a, b, c, aleft, aright); :}
+            | ID:a CORCHETE_A expresion:b CORCHETE_C                                    {: RESULT = new AccesoVector(a, b, null, aleft, aright); :}
+            | ID:a CORCHETE_A expresion:b CORCHETE_C CORCHETE_A expresion:c CORCHETE_C  {: RESULT = new AccesoVector(a, b, c, aleft, aright); :}
+            | ID:a PUNTO REMOVE PARENTESIS_A expresion:b PARENTESIS_C                   {: RESULT = new RemoveLista(a, b, aleft, aright); :}
+            | TOSTRING PARENTESIS_A expresion:a PARENTESIS_C                            {: RESULT = new FunctoString(a, aleft, aright); :}
+            | ROUND PARENTESIS_A expresion:a PARENTESIS_C                               {: RESULT = new FuncRound(a, aleft, aright); :}
+            | LENGTH PARENTESIS_A expresion:a PARENTESIS_C                              {: RESULT = new FuncLength(a, aleft, aright); :}
+            | ID:a PUNTO FIND PARENTESIS_A expresion:b PARENTESIS_C                     {: RESULT = new FuncFind(a, b, aleft, aright); :}
             | ENTERO:a                                                                  {: RESULT = new Nativo(Integer.parseInt(a), new Tipo(DatoNativo.ENTERO), aleft, aright); :}
             | DECIMAL:a                                                                 {: RESULT = new Nativo(new Double(a), new Tipo(DatoNativo.DECIMAL), aleft, aright); :}
             | CADENA:a                                                                  {: RESULT = new Nativo(a, new Tipo(DatoNativo.CADENA), aleft, aright); :}
@@ -231,10 +292,6 @@ expresion ::= MENOS expresion:a                                                 
             | TRUE:a                                                                    {: RESULT = new Nativo(true, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
             | FALSE:a                                                                   {: RESULT = new Nativo(false, new Tipo(DatoNativo.BOOLEANO), aleft, aright); :}
             | ID:a                                                                      {: RESULT = new AccesoVariable(a, aleft, aright); :}
-            | ID:a CORCHETE_A expresion:b CORCHETE_C                                    {: RESULT = new AccesoVector(a, b, null, aleft, aright); :}
-            | ID:a CORCHETE_A expresion:b CORCHETE_C CORCHETE_A expresion:c CORCHETE_C  {: RESULT = new AccesoVector(a, b, c, aleft, aright); :}
-            | ID:a PUNTO REMOVE PARENTESIS_A expresion:b PARENTESIS_C                   {: RESULT = new RemoveLista(a, b, aleft, aright); :}
-            | PARENTESIS_A expresion:a PARENTESIS_C                                     {: RESULT = a; :}
 ;
 
 tiposCasteo ::= INT         {:   RESULT=DatoNativo.ENTERO;   :}
@@ -247,7 +304,6 @@ tipos ::= INT           {:   RESULT=new Tipo(DatoNativo.ENTERO);   :}
         | STRING        {:   RESULT=new Tipo(DatoNativo.CADENA);   :}
         | CHAR          {:   RESULT=new Tipo(DatoNativo.CARACTER);   :}
         | BOOLEANO      {:   RESULT=new Tipo(DatoNativo.BOOLEANO);   :}
-        | VOID          {:   RESULT=new Tipo(DatoNativo.VOID);   :}
 ;
 
 mutabilidad ::= VAR     {:   RESULT = TipoMutabilidad.VAR;   :}

@@ -2,9 +2,13 @@
 package Simbolo;
 
 import Abstracto.Instruccion;
+import Funciones.DeclaracionStructs;
 import Funciones.Errores;
+import Funciones.FuncFunciones;
 import Funciones.Metodos;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Arbol {
     
@@ -13,6 +17,7 @@ public class Arbol {
     private TablaSimbolos tablaGlobal;
     public LinkedList<Errores> errores;
     private LinkedList<Instruccion> FuncYMetod;
+    private LinkedList<Instruccion> Structs;
 
     public Arbol(LinkedList<Instruccion> instrucciones) {
         this.instrucciones = instrucciones;
@@ -20,6 +25,7 @@ public class Arbol {
         this.tablaGlobal = new TablaSimbolos();
         this.errores = new LinkedList<>();
         this.FuncYMetod = new LinkedList<>();
+        this.Structs = new LinkedList<>();
     }
 
     public LinkedList<Instruccion> getInstrucciones() {
@@ -75,7 +81,15 @@ public class Arbol {
             } else {
                 this.FuncYMetod.add(funcmetod);
             }
-        }  
+        } else if(funcmetod instanceof FuncFunciones funcion){  
+            var encontro = this.getFuncMetod(funcion.ID);
+            if(encontro != null){
+                Errores error = new Errores("SEMANTICO", "La funcion con el nombre " + funcion.ID + " ya existe", funcion.linea, funcion.columna);
+                this.errores.add(error);
+            } else {
+                this.FuncYMetod.add(funcmetod);
+            }
+        }
     }
     
     public Instruccion getFuncMetod(String ID){
@@ -84,9 +98,44 @@ public class Arbol {
                 if(metodo.ID.equalsIgnoreCase(ID)){
                     return i;
                 }
+            } else if(i instanceof FuncFunciones funcion) {
+                if(funcion.ID.equalsIgnoreCase(ID)){
+                    return i;
+                }
             }
         }
         return null;
     }
+
+    public LinkedList<Instruccion> getStructs() {
+        return Structs;
+    }
+
+    public void setStructs(LinkedList<Instruccion> Structs) {
+        this.Structs = Structs;
+    }
     
+    public void addStruct(Instruccion struct){
+        if(struct instanceof DeclaracionStructs stru){
+            var encontro = this.getStruct(stru.ID);
+            if(encontro != null){
+                Errores error = new Errores("SEMANTICO", "El Struct con el nombre " + stru.ID + " ya existe", stru.linea, stru.columna);
+                this.errores.add(error);
+            } else {
+                this.Structs.add(struct);
+            }
+        }
+    }
+    
+    public Instruccion getStruct(String ID){
+        for(var i: this.Structs){
+           if(i instanceof DeclaracionStructs stru){
+                if(stru.ID.equalsIgnoreCase(ID)){
+                    return i;
+                }
+            } 
+        }
+        return null;
+    }
+
 }

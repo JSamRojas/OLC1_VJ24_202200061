@@ -34,7 +34,7 @@ public class ModificacionVar extends Instruccion {
         //COMPRUEBA QUE LA VARIABLE EXISTA
         var variable = tabla.getVariable(this.ID);
         if(variable == null){
-            return new Errores("SEMANTICO", "La variable con identificador " + this.ID.toString() + " no existe", this.linea, this.columna);
+            return new Errores("SEMANTICO", "La variable con identificador " + this.ID + " no existe", this.linea, this.columna);
         }
         
         // IF PARA SABER SI LA MODIFICACION ES NORMAL, O ES DE AUMENTO - DECREMENTO
@@ -89,7 +89,7 @@ public class ModificacionVar extends Instruccion {
             }
             
             if(!variable.getMutabilidad()){
-                return new Errores("SEMANTICO", "La variable " + this.ID.toString() + " es de tipo const, por lo que no se puede modificar", this.linea, this.columna);
+                return new Errores("SEMANTICO", "La variable " + this.ID + " es de tipo const, por lo que no se puede modificar", this.linea, this.columna);
             }
             
             variable.setValor(newValor);

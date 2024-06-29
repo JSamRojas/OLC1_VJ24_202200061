@@ -11,5 +11,6 @@ public enum DatoNativo {
     BOOLEANO,
     CARACTER,
     CADENA,
-    VOID
+    VOID,
+    STRUCT
 }

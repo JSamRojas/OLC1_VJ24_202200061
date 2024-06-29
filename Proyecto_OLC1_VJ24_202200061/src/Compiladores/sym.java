@@ -10,63 +10,69 @@ public class sym {
   /* terminals */
   public static final int DOSPUNTOS = 9;
   public static final int DIFERENCIA = 21;
-  public static final int CHAR = 43;
-  public static final int CONST = 40;
-  public static final int GUIONBAJO = 38;
+  public static final int CHAR = 45;
+  public static final int CONST = 42;
+  public static final int GUIONBAJO = 40;
   public static final int POR = 17;
   public static final int PUNTOYCOMA = 10;
-  public static final int REMOVE = 58;
+  public static final int FIND = 63;
+  public static final int REMOVE = 60;
   public static final int ENTERO = 2;
   public static final int XOR = 28;
-  public static final int DOUBLE = 47;
-  public static final int CONTINUE = 52;
-  public static final int INT = 41;
-  public static final int CORCHETE_C = 37;
-  public static final int PRINTLN = 46;
-  public static final int CORCHETE_A = 36;
-  public static final int LLAVE_C = 35;
-  public static final int FOR = 50;
-  public static final int LLAVE_A = 34;
-  public static final int MATCH = 49;
+  public static final int DOUBLE = 49;
+  public static final int CONTINUE = 54;
+  public static final int INT = 43;
+  public static final int CORCHETE_C = 39;
+  public static final int PRINTLN = 48;
+  public static final int CORCHETE_A = 38;
+  public static final int LLAVE_C = 37;
+  public static final int FOR = 52;
+  public static final int LLAVE_A = 36;
+  public static final int MATCH = 51;
   public static final int NOT = 29;
   public static final int MENORIGUAL = 23;
   public static final int AND = 27;
-  public static final int APPEND = 57;
+  public static final int APPEND = 59;
   public static final int IGUAL = 13;
   public static final int CARACTER = 8;
   public static final int OR = 26;
   public static final int SUMA = 15;
-  public static final int UMENOS = 59;
-  public static final int IF = 45;
+  public static final int UMENOS = 65;
+  public static final int IF = 47;
   public static final int ID = 4;
   public static final int MAYORIGUAL = 25;
   public static final int EOF = 0;
   public static final int DECIMAL = 3;
-  public static final int STARTWITH = 54;
+  public static final int RETURN = 64;
+  public static final int STARTWITH = 56;
   public static final int TRUE = 6;
-  public static final int NEW = 55;
+  public static final int NEW = 57;
   public static final int error = 1;
   public static final int COMA = 11;
   public static final int CADENA = 5;
   public static final int MENOS = 16;
   public static final int MENOR = 22;
   public static final int MOD = 20;
-  public static final int BREAK = 51;
-  public static final int VOID = 53;
+  public static final int BREAK = 53;
+  public static final int TOSTRING = 33;
+  public static final int VOID = 55;
   public static final int DOSIGUAL = 14;
   public static final int MAYOR = 24;
   public static final int POTENCIA = 19;
-  public static final int ELSE = 48;
+  public static final int ELSE = 50;
   public static final int PUNTO = 12;
-  public static final int PARENTESIS_C = 33;
+  public static final int PARENTESIS_C = 35;
   public static final int WHILE = 31;
-  public static final int LIST = 56;
-  public static final int PARENTESIS_A = 32;
-  public static final int BOOLEANO = 42;
-  public static final int STRING = 44;
+  public static final int LIST = 58;
+  public static final int PARENTESIS_A = 34;
+  public static final int BOOLEANO = 44;
+  public static final int STRING = 46;
   public static final int FALSE = 7;
   public static final int DIVISION = 18;
-  public static final int VAR = 39;
+  public static final int STRUCT = 32;
+  public static final int VAR = 41;
+  public static final int LENGTH = 62;
+  public static final int ROUND = 61;
   public static final int DO = 30;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -101,6 +107,8 @@ public class sym {
   "NOT",
   "DO",
   "WHILE",
+  "STRUCT",
+  "TOSTRING",
   "PARENTESIS_A",
   "PARENTESIS_C",
   "LLAVE_A",
@@ -128,6 +136,10 @@ public class sym {
   "LIST",
   "APPEND",
   "REMOVE",
+  "ROUND",
+  "LENGTH",
+  "FIND",
+  "RETURN",
   "UMENOS"
   };
 }
