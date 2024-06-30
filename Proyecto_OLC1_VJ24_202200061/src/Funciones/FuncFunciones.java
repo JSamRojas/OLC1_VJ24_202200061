@@ -31,9 +31,7 @@ public class FuncFunciones extends Instruccion {
         for(var i : this.InstruccionesFuncion){
             
             if(i instanceof Return ret){
-                if(ret.tablaEntorno == null){
-                    ret.setTablaEntorno(tabla);
-                }
+                ret.setTablaEntorno(tabla);
                 return ret;
             }
             

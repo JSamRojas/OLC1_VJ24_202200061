@@ -172,7 +172,7 @@ public class Relacionales extends Instruccion {
                 switch (tipo2) {
                     case CADENA -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
-                       if( op1.toString().length() == op2.toString().length()){
+                       if( op1.toString().equals(op2.toString())){
                            return true;
                        } else {
                            return false;
@@ -309,7 +309,7 @@ public class Relacionales extends Instruccion {
                 switch (tipo2) {
                     case CADENA -> {
                        this.tipo.setTipo(DatoNativo.BOOLEANO);
-                       if( op1.toString().length() != op2.toString().length()){
+                       if( !op1.toString().equals(op2.toString())){
                            return true;
                        } else {
                            return false;
