@@ -1,12 +1,15 @@
-Terminales = {ENTERO, DECIMAL, ID, CADENA, TRUE, FALSE, CARACTER, DOSPUNTOS, PUNTOYCOM,
+Terminales = {ENTERO, DECIMAL, ID, CADENA, TRUE, FALSE, CARACTER, DOSPUNTOS, PUNTOYCOM, COMA, PUNTO,
 			 IGUAL, DOSIGUAL, SUMA, MENOS, POR, DIVISION, POTENCIA, MOD, DIFERENCIA, MENOR, MENORIGUAL,
-			 MAYOR, MAYORIGUAL, OR, AND, XOR, NOT, DO, WHILE, PARENTESIS_A, PARENTESIS_C, LLAVE_A,
-			 LLAVE_C, CORCHETE_A, CORCHETE_C, GUIONBAJO, VAR, CONST, INT, BOOLEANO, CHAR, STRING,
-			 IF, PRINTLN, DOUBLE, ELSE, MATCH, FOR, BREAK, CONTINUE, UMENOS}
+			 MAYOR, MAYORIGUAL, OR, AND, XOR, NOT, DO, WHILE, STRUCT, TOSTRING, PARENTESIS_A, PARENTESIS_C, 
+			 LLAVE_A, LLAVE_C, CORCHETE_A, CORCHETE_C, GUIONBAJO, VAR, CONST, INT, BOOLEANO, CHAR, STRING,
+			 IF, PRINTLN, DOUBLE, ELSE, MATCH, FOR, BREAK, CONTINUE, VOID, STARTWITH, NEW, LIST, APPEND,
+			 REMOVE, ROUND, LENGTH, FIND, RETURN, UMENOS}
 
-No Terminales = {<inicio>, <instrucciones>, <instruccion>, <declaracion>, <imprimir>,
-			     <modificacion>, <sif>, <smatch>, <scontinue>, <expresion>, <sfor>, <swhile>, <act_for>,
-		         <sbreak>, <sdowhile>, <tiposCasteo>, <tipos>, <mutabilidad>, <casos>, <caso>}
+No Terminales = {<inicio>, <instrucciones>, <instruccion>, <listaexpresiones> , <listaparams>, <declaracion>, 
+				 <imprimir>, <modificacion>, <sif>, <smatch>, <scontinue>, <expresion>, <sfor>, <swhile>, 
+				 <act_for>, <sbreak>, <sdowhile>, <sappend>, <sremove>, <tiposCasteo>, <tipos>, <mutabilidad>, 
+				 <casos>, <caso>, <metodo>, <sstartwith>, <sllamada>, <dstruct>, <insstruct>, <sreturn>, <params>,
+				 <listastruct>, <listaexp2D>, <listavalstruct>, <valatribstruct>, <atribstruct>}
 				 
 Simbolo Inicial = <inicio>
 
@@ -27,16 +30,76 @@ Producciones =
 				 |  <sbreak>            
 				 |  <sdowhile>          
 				 |  <scontinue>
+				 |  <sreturn>           
+				 |  <metodo>            
+				 |  <sstartwith>        
+				 |  <sappend>           
+				 |  <sremove>           
+				 |  <sllamada>          
+				 |  <dstruct>           
+				 |  <insstruct>         
 
 
 	<imprimir> ::= PRINTLN PARENTESIS_A <expresion> PARENTESIS_C PUNTOYCOMA
 
 	<declaracion> ::= <mutabilidad> ID DOSPUNTOS <tipos> IGUAL <expresion> PUNTOYCOMA
 				  | <mutabilidad> ID DOSPUNTOS <tipos> PUNTOYCOMA
+				  | <mutabilidad> ID DOSPUNTOS <tipos> CORCHETE_A CORCHETE_C IGUAL CORCHETE_A <listaexpresiones> CORCHETE_C PUNTOYCOMA
+				  | <mutabilidad> ID DOSPUNTOS <tipos> CORCHETE_A CORCHETE_C CORCHETE_A CORCHETE_C IGUAL CORCHETE_A <listaexp2D> CORCHETE_C PUNTOYCOMA
+				  | LIST MENOR <tipos> MAYOR ID IGUAL NEW LIST PARENTESIS_A PARENTESIS_C PUNTOYCOMA
 
 	<modificacion> ::= ID IGUAL <expresion> PUNTOYCOMA
+				   | ID CORCHETE_A <expresion> CORCHETE_C IGUAL <expresion> PUNTOYCOMA
+				   | ID CORCHETE_A <expresion> CORCHETE_C CORCHETE_A <expresion> CORCHETE_C IGUAL <expresion> PUNTOYCOMA
+				   | ID PUNTO ID IGUAL <expresion> PUNTOYCOMA
+				   | ID PUNTO ID PUNTO ID IGUAL <expresion>
 				   | ID SUMA SUMA PUNTOYCOMA
 				   | ID MENOS MENOS PUNTOYCOMA
+				   
+	<metodo> ::= VOID ID PARENTESIS_A <params> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+         | VOID ID PARENTESIS_A PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+         | <tipos> ID PARENTESIS_A <params> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+         | <tipos> ID PARENTESIS_A PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
+
+
+	<dstruct> ::= STRUCT LLAVE_A <listastruct> LLAVE_C ID PUNTOYCOMA
+	
+
+	<insstruct> ::= <mutabilidad> ID DOSPUNTOS ID IGUAL LLAVE_A <listavalstruct> LLAVE_C PUNTOYCOMA
+				| LLAVE_A <listavalstruct> LLAVE_C
+	
+
+	<sstartwith> ::= STARTWITH ID PARENTESIS_A <listaparams> PARENTESIS_C PUNTOYCOMA
+				 | STARTWITH ID PARENTESIS_A PARENTESIS_C PUNTOYCOMA
+	
+
+	<sllamada> ::= ID PARENTESIS_A <listaparams> PARENTESIS_C PUNTOYCOMA
+			   | ID PARENTESIS_A PARENTESIS_C PUNTOYCOMA
+	
+
+	<listaparams> ::= <listaparams> COMA <expresion>
+				  | <expresion>
+	
+
+	<listastruct> ::= <listastruct> <atribstruct> PUNTOYCOMA
+				  | <atribstruct> PUNTOYCOMA
+	
+
+	<atribstruct> ::= ID DOSPUNTOS <tipos>
+				  | ID DOSPUNTOS ID
+
+
+	<listavalstruct> ::= <listavalstruct> COMA <valatribstruct>
+					 | <valatribstruct>
+
+
+	<valatribstruct> ::= ID DOSPUNTOS <expresion>
+					 | ID DOSPUNTOS <insstruct>
+
+
+	<params> ::= <params> COMA <tipos> ID
+			 | <tipos> ID
+
 
 	<sif> ::= IF PARENTESIS_A <expresion> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C
 		  | IF PARENTESIS_A <expresion> PARENTESIS_C LLAVE_A <instrucciones> LLAVE_C ELSE LLAVE_A <instrucciones> LLAVE_C
@@ -56,7 +119,22 @@ Producciones =
 			  | ID MENOS MENOS
 
 	<smatch> ::= MATCH <expresion> LLAVE_A <casos> LLAVE_C
+	
+	
+	<sappend> ::= ID PUNTO APPEND PARENTESIS_A <expresion> PARENTESIS_C PUNTOYCOMA
+	
 
+	<listaexpresiones> ::= <listaexpresiones> COMA <expresion>
+					   | <expresion>                            
+					   
+
+	<listaexp2D> ::= <listaexp2D> COMA CORCHETE_A <listaexpresiones> CORCHETE_C
+				 | CORCHETE_A <listaexpresiones> CORCHETE_C
+	
+
+	<sremove> ::= ID PUNTO REMOVE PARENTESIS_A <expresion> PARENTESIS_C PUNTOYCOMA
+	
+	
 	<casos> ::= <casos> <caso>
 			| <caso>
 
@@ -67,9 +145,16 @@ Producciones =
 	<sbreak> ::= BREAK PUNTOYCOMA
 
 	<scontinue> ::= CONTINUE PUNTOYCOMA
+	
+	<sreturn> ::= RETURN <expresion> PUNTOYCOMA
+          | RETURN PUNTOYCOMA
+
 
 	<expresion> ::= MENOS <expresion>
 				| NOT <expresion>
+				| PARENTESIS_A <expresion> PARENTESIS_C
+				| ID PARENTESIS_A <listaparams> PARENTESIS_C
+				| ID PARENTESIS_A PARENTESIS_C
 				| <expresion> MENOS <expresion>
 				| <expresion> SUMA <expresion>
 				| <expresion> POR <expresion>
@@ -86,14 +171,22 @@ Producciones =
 				| <expresion> AND <expresion>
 				| <expresion> XOR <expresion>
 				| PARENTESIS_A tiposCasteo PARENTESIS_C <expresion>
+				| ID PUNTO ID
+				| ID PUNTO ID PUNTO ID
+				| ID CORCHETE_A <expresion> CORCHETE_C
+				| ID CORCHETE_A <expresion> CORCHETE_C CORCHETE_A <expresion> CORCHETE_C
+				| ID PUNTO REMOVE PARENTESIS_A <expresion> PARENTESIS_C
+				| TOSTRING PARENTESIS_A <expresion> PARENTESIS_C
+				| ROUND PARENTESIS_A <expresion> PARENTESIS_C
+				| LENGTH PARENTESIS_A <expresion> PARENTESIS_C
+				| ID PUNTO FIND PARENTESIS_A <expresion> PARENTESIS_C
 				| ENTERO
 				| DECIMAL
 				| CADENA
 				| CARACTER
 				| TRUE
 				| FALSE
-				| ID
-				| PARENTESIS_A <expresion> PARENTESIS_C                 
+				| ID                
 
 	<tiposCasteo> ::= INT
 				  | DOUBLE
